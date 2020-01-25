@@ -12,4 +12,6 @@ echo form_input(array(
     'value' => $search
 ));
 
+echo form_submit(null, 'Keresés');
+
 echo form_close();

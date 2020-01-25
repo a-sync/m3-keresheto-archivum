@@ -9,7 +9,7 @@ class M3 extends CI_Model {
         $this->load->database();
     }
 
-	public function parsePrograms($data)
+	public function parse_programs($data)
 	{
 		$programs = array();
 
@@ -17,7 +17,7 @@ class M3 extends CI_Model {
         {
             try
             {
-                $programs[] = $this->_parseProgram($program);
+                $programs[] = $this->_parse_program($program);
             }
             catch(Exception $error)
             {
@@ -28,12 +28,12 @@ class M3 extends CI_Model {
         return $programs;
 	}
 
-    private function _parseProgram($d)
+    private function _parse_program($d)
     {
         return array(
             'program_id' => $d['id'],
-            'info' => implode('\n', $d['info']),
-            'extended_info' => implode('\n', $d['extended_info']),
+            'info' => implode("\n", $d['info']),
+            'extended_info' => implode("\n", $d['extended_info']),
             'title' => $d['title'],
             'subtitle' => $d['subtitle'],
             'description' => $d['description'],
@@ -41,9 +41,9 @@ class M3 extends CI_Model {
             'company' => $d['company'],
             'year' => intval($d['year']) ?: '',
             'country' => $d['country'],
-            'creators' => implode('\n', $d['creators']),
-            'contributors' => implode('\n', $d['contributors']),
-            'genre' => implode('\n', $d['genre']),
+            'creators' => implode("\n", $d['creators']),
+            'contributors' => implode("\n", $d['contributors']),
+            'genre' => implode("\n", $d['genre']),
             'quality' => $d['quality'],
             'pg' => $d['pg'],
             'duration' => $d['duration'],
@@ -56,7 +56,7 @@ class M3 extends CI_Model {
         );
     }
 
-	public function insertIgnorePrograms($programs)
+	public function insert_ignore_programs($programs)
 	{
         $keys = array_keys(reset($programs));
         sort($keys);
@@ -102,5 +102,36 @@ class M3 extends CI_Model {
     protected function _insert_ignore_batch($table, $keys, $values)
 	{
 		return 'INSERT IGNORE INTO '.$table.' ('.implode(', ', $keys).') VALUES '.implode(', ', $values);
-	}
+    }
+    
+    public function get_programs($search = '', $limit = 10, $offset = 0) {
+        if ($search)
+        {
+            $this->db
+                ->like('title', $search)
+                ->or_like('subtitle', $search)
+                ->or_like('info', $search)
+                ->or_like('extended_info', $search)
+                ->or_like('description', $search)
+                //->or_like('short_description', $search)
+                //->or_like('year', $search)
+                ->or_like('creators', $search)
+                ->or_like('contributors', $search)
+                ->or_like('genre', $search)
+                ->or_like('seriesId', $search);
+        }
+
+        $count = $this->db
+            ->count_all_results('programs', FALSE);
+
+        $items = $this->db
+            ->limit($limit, $offset)
+            ->get()
+            ->result_array();
+
+        return array(
+            'count' => $count,
+            'items' => $items
+        );
+    }
 }

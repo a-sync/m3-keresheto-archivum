@@ -12,11 +12,11 @@ class Cron extends CI_Controller {
 
 	public function daily()
 	{
-		$this->output->enable_profiler(TRUE);//DEBUG
+		//$this->output->enable_profiler(TRUE);//DEBUG
 
 		$curr_timestamp = intval(date('Ymd'));
 
-		if ($curr_timestamp > $this->cron_timestamp() || true)//DEBUG
+		if ($curr_timestamp > $this->cron_timestamp())
 		{
 			$this->cron_timestamp($curr_timestamp);
 
@@ -27,8 +27,8 @@ class Cron extends CI_Controller {
 			{
 				$res = scrape_url(M3_DAILY_PROGRAM_URL);
 				$res = json_decode($res, true);
-				$res = $this->m3->parsePrograms($res['program']);
-				$res = $this->m3->insertIgnorePrograms($res);
+				$res = $this->m3->parse_programs($res['program']);
+				$res = $this->m3->insert_ignore_programs($res);
 			}
 			catch(Exception $error)
 			{
@@ -48,7 +48,7 @@ class Cron extends CI_Controller {
 		}
 		else
 		{
-			return file_get_contents('daily.cron') ?: 0;
+			return trim(file_get_contents('daily.cron')) ?: 0;
 		}
 	}
 }
