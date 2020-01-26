@@ -69,13 +69,6 @@ class M3 extends CI_Model {
 
         foreach ($programs as $row)
 		{
-			if (count(array_diff($keys, array_keys($row))) > 0 OR count(array_diff(array_keys($row), $keys)) > 0)
-			{
-				// batch function above returns an error on an empty array
-				$qb_set[] = array();
-				return;
-			}
-
 			ksort($row); // puts $row in the same order as our keys
 
             $clean = array();
@@ -105,6 +98,17 @@ class M3 extends CI_Model {
     }
     
     public function get_programs($search = '', $limit = 10, $offset = 0) {
+        $select = array(
+            'program_id',
+            'title',
+            'subtitle',
+            'isSeries',
+            'episode',
+            'episodes',
+            'short_description',
+            'duration'
+        );
+
         if ($search)
         {
             $this->db
@@ -121,16 +125,18 @@ class M3 extends CI_Model {
                 ->or_like('seriesId', $search);
         }
 
-        $count = $this->db
+        $total = $this->db
             ->count_all_results('programs', FALSE);
 
         $items = $this->db
+            ->select($select)
             ->limit($limit, $offset)
+            ->order_by('id', 'DESC')
             ->get()
             ->result_array();
 
         return array(
-            'count' => $count,
+            'total' => $total,
             'items' => $items
         );
     }

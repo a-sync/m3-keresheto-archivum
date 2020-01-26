@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-define('M3_DAILY_PROGRAM_URL', 'https://archivum.mtva.hu/m3/daily-program');
+define('M3_DAILY_PROGRAM_URL', 
+	'https://archivum.mtva.hu/m3/daily-program'
+);
 
 class Cron extends CI_Controller {
 
@@ -34,6 +36,8 @@ class Cron extends CI_Controller {
 			{
 				show_error($error);
 			}
+
+			log_message('debug', 'CRON: new items'.$res);
 
 			$this->load->view('cron', array('output'=>$res));
 		}

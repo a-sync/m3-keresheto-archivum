@@ -18,20 +18,38 @@ class App extends CI_Controller {
 
 		$this->pagination->initialize(array(
 			'base_url' => site_url(''),
-			'total_rows' => $programs['count'],
+			'total_rows' => $programs['total'],
 			'per_page' => $limit,
 			'uri_segment' => 1,
 			'reuse_query_string' => true,
 			'first_link' => '&laquo; ',
 			'last_link' => ' &raquo;',
-			'num_links' => 20
+			'num_links' => 100,
+			'full_tag_open' => '<div class="mdc-typography--subtitle1 paginator__wrapper">',
+			'full_tag_close' => '</div>',
+			'num_tag_open' => '',
+			'num_tag_close' => '',
+			'cur_tag_open' => '<span class="mdc-button paginator__tag_open">',
+			'cur_tag_close' => '</span>',
+			'next_tag_open' => '',
+			'next_tag_close' => '',
+			'prev_tag_open' => '',
+			'prev_tag_close' => '',
+			'attributes' => array('class'=>'mdc-button mdc-elevation--z1 paginator__tag')
 		));
 
 		$links = $this->pagination->create_links();
 
 		$this->load->view('head');
-		$this->load->view('search', array('search' => $search));
-		$this->load->view('list', array('items' => $programs['items'], 'links' => $links));
-		$this->load->view('foot');
+		$this->load->view('search', array(
+			'search' => $search
+		));
+		$this->load->view('list', array(
+			'items' => $programs['items'], 
+			'links' => $links
+		));
+		$this->load->view('foot', array(
+			'total' => $programs['total']
+		));
 	}
 }
