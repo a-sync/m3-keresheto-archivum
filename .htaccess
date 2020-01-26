@@ -7,7 +7,7 @@
 	RewriteEngine on
 
 	#AllowOverride All
-	RewriteBase /m3
+	RewriteBase /
 
 	# Send request via index.php (again, not if its a real file or folder)
 	RewriteCond %{REQUEST_FILENAME} !-f

@@ -24,7 +24,7 @@ class App extends CI_Controller {
 			'reuse_query_string' => true,
 			'first_link' => '&laquo; ',
 			'last_link' => ' &raquo;',
-			'num_links' => 100,
+			'num_links' => 15,
 			'full_tag_open' => '<div class="mdc-typography--subtitle1 paginator__wrapper">',
 			'full_tag_close' => '</div>',
 			'num_tag_open' => '',

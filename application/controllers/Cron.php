@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+define('MINUMUM_INTERVAL_HOURS', 12);
 define('M3_DAILY_PROGRAM_URL', 
 	'https://archivum.mtva.hu/m3/daily-program'
 );
@@ -16,12 +17,10 @@ class Cron extends CI_Controller {
 	{
 		//$this->output->enable_profiler(TRUE);//DEBUG
 
-		$curr_timestamp = intval(date('Ymd'));
+		$curr_timestamp = intval(date('YmdH'));
 
-		if ($curr_timestamp > $this->cron_timestamp())
+		if ($curr_timestamp - $this->cron_timestamp() >= MINUMUM_INTERVAL_HOURS)
 		{
-			$this->cron_timestamp($curr_timestamp);
-
 			$this->load->model('m3');
 			$this->load->helper('curl');
 
@@ -37,8 +36,9 @@ class Cron extends CI_Controller {
 				show_error($error);
 			}
 
-			log_message('debug', 'CRON: new items'.$res);
-
+			$this->cron_timestamp($curr_timestamp);
+			log_message('debug', 'CRON: '.$res.' new items');
+			
 			$this->load->view('cron', array('output'=>$res));
 		}
 		else $this->load->view('cron', array('output'=>'invalid invocation'));
@@ -48,11 +48,11 @@ class Cron extends CI_Controller {
 	{
 		if ($new_value)
 		{
-			return file_put_contents('daily.cron', $new_value);
+			return file_put_contents('daily-program.cron', $new_value);
 		}
 		else
 		{
-			return trim(file_get_contents('daily.cron')) ?: 0;
+			return intval(trim(file_get_contents('daily-program.cron'))) ?: 0;
 		}
 	}
 }

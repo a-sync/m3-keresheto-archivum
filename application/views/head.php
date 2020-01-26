@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$_title = 'm3 archívum archívum';
+$_title = 'm3 kereshető archívum';
 
 ?><!DOCTYPE html>
 <html>
@@ -37,9 +37,13 @@ $_title = 'm3 archívum archívum';
 		.paginator__wrapper {
 			margin-top: 20px;
 		}
+		.paginator__tag {
+			margin: 5px;
+		}
 		.paginator__tag_open {
 			font-weight: bold;
 			cursor: auto !important;
+			margin: 5px;
 		}
 		.cell__title {
 			white-space: normal;
@@ -57,6 +61,10 @@ $_title = 'm3 archívum archívum';
 		footer {
 			color: lightgray;
 			text-align: center;
+		}
+		.list__no_items {
+			text-align: center;
+			margin-top: 20px;
 		}
 	</style>
 </head>

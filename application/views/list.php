@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 if (count($items) === 0)
 {
-    echo 'Nincs találat...';
+    echo '<div class="mdc-typography--body1 list__no_items">Nincs találat...</div>';
 }
 else
 {
@@ -25,7 +25,7 @@ else
                 $m = intval($duration[1]) ? intval($duration[1]).'p' : '';
             ?>
             <tr class="mdc-data-table__row">
-                <td class="mdc-data-table__cell"><?php echo html_escape($i['program_id']); ?></td>
+                <td class="mdc-data-table__cell mdc-typography--caption"><?php echo html_escape($i['program_id']); ?></td>
                 <td class="mdc-data-table__cell cell__title">
                     <span class="mdc-typography--body1 cell__title--title"><?php echo html_escape($i['title']); ?></span>
                     <?php if ($i['subtitle']): ?>
