@@ -12,8 +12,7 @@ $_title = 'm3 kereshető archívum';
   	<meta name="viewport" content="width=device-width, initial-scale=1">
 
   	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
-
+	<link href="https://unpkg.com/@mdi/font@latest/css/materialdesignicons.min.css" rel="stylesheet">
 	<link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
 
 	<style type="text/css">
@@ -34,16 +33,28 @@ $_title = 'm3 kereshető archívum';
 		#search-field {
 			width: 66vw;
 		}
+		#search-form .mdi-magnify {
+			font-size: 1.7rem;
+			cursor: auto;
+		}
+		.list__total {
+			text-align: center;
+			margin-top: 10px;
+		}
 		.paginator__wrapper {
 			margin-top: 20px;
+			margin-bottom: 20px;
+			text-align: center;
 		}
-		.paginator__tag {
-			margin: 5px;
+		.paginator__wrapper .mdi {
+			font-size: 1.5rem;
 		}
-		.paginator__tag_open {
-			font-weight: bold;
-			cursor: auto !important;
-			margin: 5px;
+		.list__table {
+			width: 100%;
+		}
+		.mdc-data-table__cell {
+            padding-top: 8px;
+            padding-bottom: 8px;
 		}
 		.cell__title {
 			white-space: normal;
@@ -59,6 +70,7 @@ $_title = 'm3 kereshető archívum';
 			font-style: italic;
 		}
 		footer {
+			margin-top: 20px;
 			color: lightgray;
 			text-align: center;
 		}

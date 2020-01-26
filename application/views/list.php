@@ -7,13 +7,15 @@ if (count($items) === 0)
 }
 else
 {
-    echo $links.'<br>';
+    echo '<div class="mdc-typography--caption list__total">'.$total.' találat</div>';
+
+    echo $links;
 ?>
-<div class="mdc-data-table mdc-elevation--z2">
+<div class="mdc-data-table mdc-elevation--z2 list__table">
     <table class="mdc-data-table__table">
         <thead>
             <tr class="mdc-data-table__header-row">
-                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">ID</th>
+                <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">ID</th>
                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cím / Rövid leírás</th>
                 <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Hossz</th>
             </tr>
@@ -25,7 +27,7 @@ else
                 $m = intval($duration[1]) ? intval($duration[1]).'p' : '';
             ?>
             <tr class="mdc-data-table__row">
-                <td class="mdc-data-table__cell mdc-typography--caption"><?php echo html_escape($i['program_id']); ?></td>
+                <td class="mdc-data-table__cell mdc-data-table__cell--numeric mdc-typography--caption"><?php echo html_escape($i['program_id']); ?></td>
                 <td class="mdc-data-table__cell cell__title">
                     <span class="mdc-typography--body1 cell__title--title"><?php echo html_escape($i['title']); ?></span>
                     <?php if ($i['subtitle']): ?>
@@ -45,7 +47,7 @@ else
     </table>
 </div>
 <?php
-    echo '<br>'.$links;
+    echo $links;
 }
 
 // https://archivum.mtva.hu/images/m3/M3-87130999959999A59

@@ -117,12 +117,9 @@ class M3 extends CI_Model {
                 ->or_like('info', $search)
                 ->or_like('extended_info', $search)
                 ->or_like('description', $search)
-                //->or_like('short_description', $search)
-                //->or_like('year', $search)
                 ->or_like('creators', $search)
                 ->or_like('contributors', $search)
-                ->or_like('genre', $search)
-                ->or_like('seriesId', $search);
+                ->or_like('genre', $search);
         }
 
         $total = $this->db
