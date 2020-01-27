@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<footer class="mdc-typography--caption">{elapsed_time} mp</footer>
 
-	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+	<script src="public/mwc.min.js"></script>
 	<script type="text/javascript">
 		window.mdc.autoInit();
 	</script>

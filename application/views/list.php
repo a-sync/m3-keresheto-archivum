@@ -29,7 +29,7 @@ else
             <tr class="mdc-data-table__row">
                 <td class="mdc-data-table__cell mdc-data-table__cell--numeric mdc-typography--caption"><?php echo html_escape($i['program_id']); ?></td>
                 <td class="mdc-data-table__cell cell__title">
-                    <span class="mdc-typography--body1 cell__title--title"><?php echo html_escape($i['title']); ?></span>
+                    <span class="mdc-typography--headline6 cell__title--title"><?php echo html_escape($i['title']); ?></span>
                     <?php if ($i['subtitle']): ?>
                         &#8212;
                         <span class="mdc-typography--subtitle1 cell__title--subtitle"><?php echo html_escape($i['subtitle']) ?: ''; ?></span>
