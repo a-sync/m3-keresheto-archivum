@@ -13,7 +13,7 @@ $_title = 'm3 kereshető archívum';
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href="https://unpkg.com/@mdi/font@latest/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="public/mwc.min.css" rel="stylesheet">
+    <link href="public/m3.min.css" rel="stylesheet">
     <link href="public/app.css" rel="stylesheet">
 
 </head>

@@ -9,8 +9,11 @@ Ha az oldal valamilyen almappán keresztül érhető el az adott hoszton, a [.ht
 Egyetlen oldala van, a kereső és lista.  
 A kereső minden rögzített adatban keres, nem csupán abban ami megjelenik, a műsorok sorrendje a közzétételük időpontjának megfelelő.  
 
+### Layout
+A material-components-web CSS framework m3 színeivel tematizált változata: [m3-material-components-web](http://github.com/a-sync/m3-material-components-web)
+
 ## Backend
-Egyetlen cronjob-ból áll, ami letölti, feldolgozza és az adatbázisba rögzíti az m3 aktuális napi programját.  
+Egyetlen cronjob-ból áll, ami letölti, feldolgozza és az adatbázisban rögzíti az m3 aznapi programjában elérhető műsorokat.  
 Útvonal: **/cron/daily**
 
 ---
