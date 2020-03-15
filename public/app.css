@@ -24,6 +24,7 @@ h1 {
 .list__total {
     text-align: center;
     margin-top: 10px;
+    margin-bottom: 10px;
     color: var(--mdc-theme-text-hint-on-dark);
 }
 .paginator__wrapper {

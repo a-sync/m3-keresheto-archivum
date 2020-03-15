@@ -10,6 +10,8 @@ $_title = 'm3 kereshető archívum';
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="public/logo_100_100.png" type="image/x-icon"/>
+    <link rel="shortcut icon" href="public/logo_100_100.png" type="image/x-icon"/>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href="https://unpkg.com/@mdi/font@latest/css/materialdesignicons.min.css" rel="stylesheet">
