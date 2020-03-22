@@ -13,8 +13,15 @@ A kereső minden rögzített adatban keres, nem csupán abban ami megjelenik, a 
 A material-components-web CSS framework m3 színeivel tematizált változata: [m3-material-components-web](http://github.com/a-sync/m3-material-components-web)
 
 ## Backend
-Egyetlen cronjob-ból áll, ami letölti, feldolgozza és az adatbázisban rögzíti az m3 aznapi programjában elérhető műsorokat.  
+Két cronjob-ból áll, amik letöltik, feldolgozzák és az adatbázisban rögzítik az aktuálisan elérhető műsorokat.  
+
+#### Napi
+A naponta frissülő műsorlistát ellenőrzi.  
 Útvonal: **/cron/daily**
+
+#### Heti
+A hetente frissülő műsorlistát ellenőrzi.  
+Útvonal: **/cron/weekly**
 
 ---
 

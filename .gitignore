@@ -1,3 +1,7 @@
+backup/*
+!backup/index.html
+!backup/.htaccess
+
 .DS_Store
 
 application/cache/*

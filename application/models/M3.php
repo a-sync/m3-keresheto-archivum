@@ -56,8 +56,12 @@ class M3 extends CI_Model {
         );
     }
 
-	public function insert_ignore_programs($programs)
+	public function insert_ignore_programs($programs, $batch_size = 100)
 	{
+        if (!is_array($programs) || count($programs) === 0) {
+            return 0;
+        }
+
         $keys = array_keys(reset($programs));
         sort($keys);
 
@@ -79,17 +83,23 @@ class M3 extends CI_Model {
 
             $row = $clean;
 
-			$qb_set[] = '('.implode(',', $row).')';
+			$qb_vals[] = '('.implode(',', $row).')';
         }
 
-        if ($this->db->query($this->_insert_ignore_batch($this->db->protect_identifiers('programs', TRUE, TRUE, FALSE), $qb_keys, $qb_set)))
-        {
-            return $this->db->affected_rows();
+        $re = 0;
+        $records_num = count($qb_vals);
+        if ($records_num > 0) {
+            for ($inserted = 0; $inserted < $records_num; $inserted += $batch_size) {
+                $next_values = array_slice($qb_vals, $inserted, $batch_size);
+
+                if ($this->db->query($this->_insert_ignore_batch($this->db->protect_identifiers('programs', TRUE, TRUE, FALSE), $qb_keys, $next_values)))
+                {
+                    $re += $this->db->affected_rows();
+                }
+            }
         }
-        else 
-        {
-            return 0;
-        }
+
+        return $re;
 	}
 
     protected function _insert_ignore_batch($table, $keys, $values)
@@ -136,5 +146,22 @@ class M3 extends CI_Model {
             'total' => $total,
             'items' => $items
         );
+    }
+
+    public function return_missing_program_ids($ids) {
+        $found = $this->db
+            ->select(array('program_id'))
+            ->from('programs')
+            ->where_in('program_id', $ids)
+            ->get()
+            ->result_array();
+
+        foreach($found as $r) {
+            if (($key = array_search($r['program_id'], $ids)) !== false) {
+                unset($ids[$key]);
+            }
+        }
+
+        return $ids;
     }
 }
