@@ -35,6 +35,10 @@ echo form_close();
 
 <script>
 window.addEventListener('load', () => {
-    document.getElementById('search-field').focus();
+    const searchField = document.getElementById('search-field');
+    searchField.focus();
+    const v = searchField.value;
+    searchField.value = '';
+    searchField.value = v;
 });
 </script>
