@@ -84,7 +84,7 @@ class Cron extends CI_Controller {
 			try
 			{
 				$raw = scrape_url(M3_WEEKLY_URL);
-				$res = extract_ids($raw, ' data-genre="', '">');
+				$genre_list = extract_ids($raw, ' data-genre="', '">');
 			}
 			catch(Exception $error)
 			{
@@ -93,7 +93,7 @@ class Cron extends CI_Controller {
 			}
 
 			$genre_list_items = [];
-			foreach($res as $i => $genre) {
+			foreach($genre_list as $i => $genre) {
 				try {
 					$raw = scrape_url(M3_WEEKLY_GENRE_LIST . $genre);
 					$res = json_decode($raw, true);
@@ -151,6 +151,38 @@ class Cron extends CI_Controller {
 		}
 
 		return $new_items;
+	}
+
+	public function backup() {
+		//$this->output->enable_profiler(TRUE);//DEBUG
+		set_time_limit(300);
+
+		$curr_timestamp = time();
+		$diff = $curr_timestamp - $this->cron_timestamp(null, 'backup.cron');
+
+		if ($diff >= MINUMUM_INTERVAL_DAILY)
+		{
+			$this->load->dbutil();
+			$this->load->helper('file');
+
+			$backup = $this->dbutil->backup(array('add_drop'=>false));
+			$res = write_file('./public/m3-db.gz', $backup);
+
+			if ($res) {
+				$this->cron_timestamp($curr_timestamp, 'backup.cron');
+				$res = get_file_info('./public/m3-db.gz');
+				$res = print_r($res, true);
+				log_message('debug', 'BACKUP: '.$res);
+			} else {
+				log_message('error', 'BACKUP FAILED');
+			}
+
+			$this->load->view('cron', array('output'=>$res));
+		}
+		else 
+		{
+			$this->load->view('cron', array('output'=>'diff:'.$diff));
+		}
 	}
 
 	private function cron_timestamp($new_value = null, $name = 'daily-program.cron')
