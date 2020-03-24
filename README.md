@@ -1,7 +1,7 @@
 # m3-keresheto-archivum
 
 ## Telepítés / futtatás
-CodeIgniter 3.1 keretrendszert használ az alkalmazás. (PHP 5.5+ szükséges)  
+CodeIgniter 3.1 keretrendszert használ az alkalmazás. (minimum PHP 5.6 javasolt)  
 
 Az adatbázis beállításai a [database.php](application/config/database.php#L76) fájlban találhatók.
 
