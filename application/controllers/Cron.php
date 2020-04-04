@@ -21,6 +21,9 @@ define('M3_ITEM_INFO',
 define('M3_SERIES_INFO', 
 	'https://archivum.mtva.hu/m3/open?series='
 );
+define('M3_COLLECTION_INFO', 
+	'https://archivum.mtva.hu/m3/get-open?collection='
+);
 
 class Cron extends CI_Controller {
 
@@ -84,7 +87,7 @@ class Cron extends CI_Controller {
 			try
 			{
 				$raw = scrape_url(M3_WEEKLY_URL);
-				$genre_list = extract_ids($raw, ' data-genre="', '">');
+				$coll_list = extract_ids($raw, ' data-collection="', '">');
 			}
 			catch(Exception $error)
 			{
@@ -92,19 +95,19 @@ class Cron extends CI_Controller {
 				show_error($error);
 			}
 
-			$genre_list_items = [];
-			foreach($genre_list as $i => $genre) {
+			$coll_list_items = [];
+			foreach($coll_list as $i => $coll) {
 				try {
-					$raw = scrape_url(M3_WEEKLY_GENRE_LIST . $genre);
+					$raw = scrape_url(M3_COLLECTION_INFO . $coll);
 					$res = json_decode($raw, true);
-					$genre_list_items = array_merge($genre_list_items, $res['docs']);
+					$coll_list_items = array_merge($coll_list_items, $res['docs']);
 				} catch (Exception $error) {
-					@file_put_contents('./backup/genre-'.$genre.'-'.date('YmdHis').'.json', $raw);
+					@file_put_contents('./backup/coll-'.$coll.'-'.date('YmdHis').'.json', $raw);
 					log_message('error', $error);
 				}
 			}
 
-			$res = $this->_parse_genre_list_items($genre_list_items);
+			$res = $this->_parse_genre_list_items($coll_list_items);
 			$res = $this->m3->parse_programs($res);
 			$res = $this->m3->insert_ignore_programs($res);
 
@@ -137,16 +140,17 @@ class Cron extends CI_Controller {
 		}
 
 		$new_items = [];
-
-		$missing_ids = $this->m3->return_missing_program_ids($program_ids);
-		foreach($missing_ids as $id) {
-			try {
-				$raw = scrape_url(M3_ITEM_INFO . $id);
-				$res = json_decode($raw, true);
-				$new_items[] = $res;
-			} catch (Exception $error) {
-				@file_put_contents('./backup/item-'.$id.'-'.date('YmdHis').'.json', $raw);
-				log_message('error', $error);
+		if (count($program_ids)) {
+			$missing_ids = $this->m3->return_missing_program_ids($program_ids);
+			foreach($missing_ids as $id) {
+				try {
+					$raw = scrape_url(M3_ITEM_INFO . $id);
+					$res = json_decode($raw, true);
+					$new_items[] = $res;
+				} catch (Exception $error) {
+					@file_put_contents('./backup/item-'.$id.'-'.date('YmdHis').'.json', $raw);
+					log_message('error', $error);
+				}
 			}
 		}
 

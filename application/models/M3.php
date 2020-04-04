@@ -149,14 +149,10 @@ class M3 extends CI_Model {
     }
 
     public function return_missing_program_ids($ids) {
-        $found = $this->db
-            ->select(array('program_id'))
-            ->from('programs')
-            ->where_in('program_id', $ids)
-            ->get()
-            ->result_array();
+        $id_list = implode("','", $ids);
+        $q = $this->db->query("SELECT program_id FROM programs WHERE program_id IN ('{$id_list}')");
 
-        foreach($found as $r) {
+        foreach($q->result_array() as $r) {
             if (($key = array_search($r['program_id'], $ids)) !== false) {
                 unset($ids[$key]);
             }
