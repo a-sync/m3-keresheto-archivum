@@ -160,4 +160,11 @@ class M3 extends CI_Model {
 
         return $ids;
     }
+
+    public function return_programs_csv_query() {
+        return $this->db
+            ->select('program_id,title,subtitle,episode,episodes,seriesId,quality,year,duration,short_description')
+            ->order_by('id', 'DESC')
+            ->get('programs');
+    }
 }

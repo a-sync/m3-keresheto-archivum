@@ -189,6 +189,39 @@ class Cron extends CI_Controller {
 		}
 	}
 
+	public function csv() {
+		//$this->output->enable_profiler(TRUE);//DEBUG
+		set_time_limit(300);
+
+		$curr_timestamp = time();
+		$diff = $curr_timestamp - $this->cron_timestamp(null, 'csv.cron');
+
+		if ($diff >= MINUMUM_INTERVAL_DAILY)
+		{
+			$this->load->dbutil();
+			$this->load->helper('file');
+			$this->load->model('m3');
+
+			$csv = $this->dbutil->csv_from_result($this->m3->return_programs_csv_query(), ';');
+			$res = write_file('./public/m3-db.csv.gz', gzencode($csv));
+
+			if ($res) {
+				$this->cron_timestamp($curr_timestamp, 'csv.cron');
+				$res = get_file_info('./public/m3-db.csv.gz');
+				$res = print_r($res, true);
+				log_message('debug', 'CSV: '.$res);
+			} else {
+				log_message('error', 'CSV FAILED');
+			}
+
+			$this->load->view('cron', array('output'=>$res));
+		}
+		else 
+		{
+			$this->load->view('cron', array('output'=>'diff:'.$diff));
+		}
+	}
+
 	private function cron_timestamp($new_value = null, $name = 'daily-program.cron')
 	{
 		if ($new_value)
