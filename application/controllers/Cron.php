@@ -221,7 +221,7 @@ class Cron extends CI_Controller {
 			$this->load->view('cron', array('output'=>'diff:'.$diff));
 		}
 	}
-	
+
 	public function add() {
 		$this->load->model('m3');
 		$this->load->helper('curl');

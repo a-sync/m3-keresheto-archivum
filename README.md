@@ -21,19 +21,39 @@ A material-components-web CSS framework m3 színeivel tematizált változata: [m
 
 ## Backend
 Két cronjob letölti, feldolgozza és az adatbázisban rögzíti az aktuálisan elérhető műsorokat.  
-Egy pedig adatbázis biztonsági mentést hoz létre.  
+Két másik adatbázis biztonsági mentést, és részleges CSV exportot hoz létre.  
+Egy aloldal pedig műsorok hozzáadását teszi lehetővé M3-* azonosító megadásával.   
 
-#### Napi
+#### Napi műsorok frissítése
+Útvonal: **/cron/daily**  
 A naponta frissülő műsorlistát ellenőrzi.  
-Útvonal: **/cron/daily**
 
-#### Heti
+#### Heti műsorok frissítése
+Útvonal: **/cron/weekly**  
 A hetente frissülő műsorlistát ellenőrzi.  
-Útvonal: **/cron/weekly**
 
 #### Biztonsági mentés (napi)
+Útvonal: **/cron/backup**  
 A teljes adatbázist exportálja a **/public/m3-db.gz** tömörített fájlba.  
-Útvonal: **/cron/backup**
+
+#### CSV export (napi)
+Útvonal: **/cron/csv**  
+Az alábbi mezőket exportálja a **/public/m3-db.csv.gz** tömörített fájlba.  
+ * program_id
+ * title
+ * subtitle
+ * episode
+ * episodes
+ * seriesId
+ * quality
+ * year
+ * duration
+ * short_description
+
+#### Műsor hozzáadása azonosító segítségével
+Útvonal: **/cron/add?id=**  
+Egy vagy több műsor adatait kéri le és rögzíti az adatbázisban. Több azonosító esetén, vesszővel (`,`) elválasztott listát vár.  
+pl.: *https://m3.devs.space/cron/add/?id=M3-123456789,M3-987654321*
 
 ---
 
