@@ -129,7 +129,8 @@ class M3 extends CI_Model {
                 ->or_like('description', $search)
                 ->or_like('creators', $search)
                 ->or_like('contributors', $search)
-                ->or_like('genre', $search);
+                ->or_like('genre', $search)
+                ->or_where('program_id', $search);
         }
 
         $total = $this->db

@@ -221,6 +221,43 @@ class Cron extends CI_Controller {
 			$this->load->view('cron', array('output'=>'diff:'.$diff));
 		}
 	}
+	
+	public function add() {
+		$this->load->model('m3');
+		$this->load->helper('curl');
+		$ids = explode(',', $this->input->get('id'));
+
+		$program_ids = [];
+		foreach($ids as $id) {
+			if (substr($id,0,3) === 'M3-' || substr($id,0,6) === 'RADIO-') {
+				$program_ids[] = $id;
+			}
+		}
+
+		$new_items = [];
+		if (count($program_ids)) {
+			$missing_ids = $this->m3->return_missing_program_ids($program_ids);
+			foreach($missing_ids as $id) {
+				try {
+					$raw = scrape_url(M3_ITEM_INFO . $id);
+					if ($raw !== 'false') {
+						$res = json_decode($raw, true);
+						$new_items[] = $res;
+					}
+				} catch (Exception $error) {
+					log_message('error', $error);
+				}
+			}
+		}
+
+		$res = 0;
+		if (count($new_items)) {
+			$res = $this->m3->parse_programs($new_items);
+			$res = $this->m3->insert_ignore_programs($res);
+		}
+
+		$this->load->view('cron', array('output'=>$res));
+	}
 
 	private function cron_timestamp($new_value = null, $name = 'daily-program.cron')
 	{
