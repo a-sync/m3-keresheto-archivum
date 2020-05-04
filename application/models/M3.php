@@ -39,7 +39,7 @@ class M3 extends CI_Model {
             'description' => $d['description'],
             'short_description' => $d['short_description'],
             'company' => $d['company'],
-            'year' => intval($d['year']) ?: '',
+            'year' => intval($d['year']),
             'country' => $d['country'],
             'creators' => implode("\n", $d['creators']),
             'contributors' => implode("\n", $d['contributors']),
@@ -51,8 +51,8 @@ class M3 extends CI_Model {
             'hasSubtitle' => boolval($d['hasSubtitle']),
             'isSeries' => boolval($d['isSeries']),
             'seriesId' => base64_decode($d['seriesId']) ?: '',
-            'episode' => intval($d['episode']) ?: '',
-            'episodes' => intval($d['episodes']) ?: ''
+            'episode' => intval($d['episode']),
+            'episodes' => intval($d['episodes'])
         );
     }
 
@@ -150,6 +150,7 @@ class M3 extends CI_Model {
     }
 
     public function return_missing_program_ids($ids) {
+        $ids = array_unique($ids);
         $id_list = implode("','", $ids);
         $q = $this->db->query("SELECT program_id FROM programs WHERE program_id IN ('{$id_list}')");
 
