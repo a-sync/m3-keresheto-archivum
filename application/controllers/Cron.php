@@ -59,7 +59,7 @@ class Cron extends CI_Controller {
 			}
 
 			$this->cron_timestamp($curr_timestamp);
-			log_message('debug', 'CRON: '.$res.' new items');
+			log_message('debug', 'DAILY CRON: '.$res.' new items');
 			
 			$this->load->view('cron', array('output'=>$res));
 		}
@@ -112,7 +112,7 @@ class Cron extends CI_Controller {
 			$res = $this->m3->insert_ignore_programs($res);
 
 			$this->cron_timestamp($curr_timestamp, 'weekly-program.cron');
-			log_message('debug', 'CRON: '.$res.' new items');
+			log_message('debug', 'WEEKLY CRON: '.$res.' new items');
 
 			$this->load->view('cron', array('output'=>$res));
 		}
@@ -125,14 +125,25 @@ class Cron extends CI_Controller {
 	private function _parse_genre_list_items($items) {
 		$program_ids = [];
 		foreach($items as $item) {
-			if ($item['isSeries']) {
-				try {
-					$raw = scrape_url(M3_SERIES_INFO . $item['seriesId']);
-					$series_ids = extract_ids($raw, '<div class="show-bg" style="background-image: url(https://archivum.mtva.hu/images/m3/', ')"></div>');
-					$program_ids = array_merge($program_ids, $series_ids);
-				} catch (Exception $error) {
-					@file_put_contents('./backup/series-'.$item['seriesId'].'-'.date('YmdHis').'.html', $raw);
-					log_message('error', $error);
+			if ($item['seriesId']) {
+				$pages = 1;
+				for ($i = 1; $i <= $pages; $i++) {
+					try {
+						$raw = scrape_url(M3_SERIES_INFO . $item['seriesId'] . '&page=' . $i);
+
+						if ($i === 1) {
+							$page_ids = extract_ids($raw, 'open?series='.urlencode($item['seriesId']).'&page=', '"');
+							if (count($page_ids) > 0) {
+								$pages = max($page_ids);
+							}
+						}
+
+						$series_ids = extract_ids($raw, '<div class="show-bg" style="background-image: url(https://archivum.mtva.hu/images/m3/', ')"></div>');
+						$program_ids = array_merge($program_ids, $series_ids);
+					} catch (Exception $error) {
+						@file_put_contents('./backup/series-'.$item['seriesId'].'-'.$i.'-'.date('YmdHis').'.html', $raw);
+						log_message('error', $error);
+					}
 				}
 			} else {
 				$program_ids[] = $item['id'];
@@ -229,7 +240,7 @@ class Cron extends CI_Controller {
 
 		$program_ids = [];
 		foreach($ids as $id) {
-			if (substr($id,0,3) === 'M3-' || substr($id,0,6) === 'RADIO-') {
+			if (substr($id,0,3) === 'M3-') {
 				$program_ids[] = $id;
 			}
 		}
