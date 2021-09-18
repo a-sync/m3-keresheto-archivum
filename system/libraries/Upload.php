@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Uploads
  * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/libraries/file_uploading.html
+ * @link		https://codeigniter.com/userguide3/libraries/file_uploading.html
  */
 class CI_Upload {
 
@@ -1183,7 +1183,7 @@ class CI_Upload {
 	 * Prevents possible script execution from Apache's handling
 	 * of files' multiple extensions.
 	 *
-	 * @link	http://httpd.apache.org/docs/1.3/mod/mod_mime.html#multipleext
+	 * @link	https://httpd.apache.org/docs/1.3/mod/mod_mime.html#multipleext
 	 *
 	 * @param	string	$filename
 	 * @return	string
@@ -1257,9 +1257,7 @@ class CI_Upload {
 		 */
 		if (DIRECTORY_SEPARATOR !== '\\')
 		{
-			$cmd = function_exists('escapeshellarg')
-				? 'file --brief --mime '.escapeshellarg($file['tmp_name']).' 2>&1'
-				: 'file --brief --mime '.$file['tmp_name'].' 2>&1';
+			$cmd = 'file --brief --mime '.escapeshellarg($file['tmp_name']).' 2>&1';
 
 			if (function_usable('exec'))
 			{
@@ -1276,7 +1274,7 @@ class CI_Upload {
 				}
 			}
 
-			if ( ! ini_get('safe_mode') && function_usable('shell_exec'))
+			if (function_usable('shell_exec'))
 			{
 				$mime = @shell_exec($cmd);
 				if (strlen($mime) > 0)
