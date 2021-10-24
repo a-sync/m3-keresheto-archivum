@@ -175,7 +175,7 @@ class Cron extends CI_Controller {
 		$curr_timestamp = time();
 		$diff = $curr_timestamp - $this->cron_timestamp(null, 'backup.cron');
 
-		if ($diff >= MINUMUM_INTERVAL_DAILY)
+		if ($diff >= MINUMUM_INTERVAL_WEEKLY)
 		{
 			$this->load->dbutil();
 			$this->load->helper('file');
@@ -310,6 +310,8 @@ class Cron extends CI_Controller {
 				// redirect('/cron/refresh?id='.$prev_id.'&res='.intval($res));
 				header('Refresh:1;url='.site_url('/cron/refresh?id='.$prev_id.'&res='.intval($res)));
 				exit($res);
+			} else {
+				@touch('refresh.cron.disabled');
 			}
 		}
 

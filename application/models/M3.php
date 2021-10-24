@@ -105,17 +105,19 @@ class M3 extends CI_Model {
 		return 'INSERT IGNORE INTO '.$table.' ('.implode(', ', $keys).') VALUES '.implode(', ', $values);
     }
     
-    public function get_programs($search = '', $limit = 10, $offset = 0) {
-        $select = array(
-            'program_id',
-            'title',
-            'subtitle',
-            'isSeries',
-            'episode',
-            'episodes',
-            'short_description',
-            'duration'
-        );
+    public function get_programs($search = '', $limit = 10, $offset = 0, $select = false) {
+        if ($select === false) {
+            $select = array(
+                'program_id',
+                'title',
+                'subtitle',
+                'isSeries',
+                'episode',
+                'episodes',
+                'short_description',
+                'duration'
+            );
+        }
 
         if ($search)
         {

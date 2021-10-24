@@ -32,7 +32,7 @@ A naponta frissülő műsorlistát ellenőrzi.
 Útvonal: **/cron/weekly**  
 A hetente frissülő műsorlistát ellenőrzi.  
 
-#### Biztonsági mentés (napi)
+#### Biztonsági mentés (heti)
 Útvonal: **/cron/backup**  
 A teljes adatbázist exportálja a **/public/m3-db.gz** tömörített fájlba.  
 

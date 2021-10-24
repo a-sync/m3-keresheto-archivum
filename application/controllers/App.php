@@ -14,8 +14,9 @@ class App extends CI_Controller {
 		$limit = 10;
 		$offset = intval($this->uri->segment(1)) ? (intval($this->uri->segment(1)) - 1) * $limit : 0;
 		$search = trim($this->input->get('kereses', TRUE));
+		$select = $this->input->get('nyers') === '' ? '*' : false;
 
-		$programs = $this->m3->get_programs($search, $limit, $offset);
+		$programs = $this->m3->get_programs($search, $limit, $offset, $select);
 
 		$this->pagination->initialize(array(
 			'base_url' => site_url(''),
@@ -31,7 +32,7 @@ class App extends CI_Controller {
 		$this->load->view('search', array(
 			'search' => $search
 		));
-		$this->load->view('list', array(
+		$this->load->view('list'.($select?'-raw':''), array(
 			'items' => $programs['items'], 
 			'links' => $links,
 			'total' => $programs['total']
