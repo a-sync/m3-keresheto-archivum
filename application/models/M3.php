@@ -4,8 +4,6 @@ class M3 extends CI_Model {
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->load->database();
     }
 
@@ -17,7 +15,7 @@ class M3 extends CI_Model {
         {
             try
             {
-                $programs[] = $this->_parse_program($program);
+                $programs[] = $this->parse_program($program);
             }
             catch(Exception $error)
             {
@@ -28,7 +26,7 @@ class M3 extends CI_Model {
         return $programs;
 	}
 
-    private function _parse_program($d)
+    public function parse_program($d)
     {
         return array(
             'program_id' => $d['id'],
@@ -44,10 +42,10 @@ class M3 extends CI_Model {
             'creators' => implode("\n", $d['creators']),
             'contributors' => implode("\n", $d['contributors']),
             'genre' => implode("\n", $d['genre']),
-            'quality' => $d['quality'],
-            'pg' => $d['pg'],
+            'quality' => is_null($d['quality']) ? '' : $d['quality'],
+            'pg' => is_null($d['pg']) ? '' : $d['pg'],
             'duration' => $d['duration'],
-            'ratio' => $d['ratio'],
+            'ratio' => is_null($d['ratio']) ? '' : $d['ratio'],
             'hasSubtitle' => boolval($d['hasSubtitle']),
             'isSeries' => boolval($d['isSeries']),
             'seriesId' => base64_decode($d['seriesId']) ?: '',
@@ -168,5 +166,19 @@ class M3 extends CI_Model {
             ->select('program_id,title,subtitle,episode,episodes,seriesId,quality,year,duration,short_description')
             ->order_by('id', 'DESC')
             ->get('programs');
+    }
+
+    public function get_program_id_by_id($id) {
+        return $this->db
+            ->select('program_id')
+            ->where('id', $id)
+            ->get('programs')
+            ->row_array();
+    }
+
+    public function replace_program($data) {
+        $this->db->replace('programs', $data);
+
+        return $this->db->affected_rows();
     }
 }

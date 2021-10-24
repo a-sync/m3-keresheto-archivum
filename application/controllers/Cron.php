@@ -270,6 +270,52 @@ class Cron extends CI_Controller {
 		$this->load->view('cron', array('output'=>$res));
 	}
 
+	public function refresh() {
+		if (file_exists('refresh.cron.disabled')) {
+			show_error('Disabled...', 403);
+		}
+
+		$this->load->model('m3');
+		$this->load->helper(array('curl', 'url'));
+		$id = intval($this->input->get('id'));
+
+		$res = 0;
+
+		if ($id) {
+			$program = $this->m3->get_program_id_by_id($id);
+
+			if ($program && isset($program['program_id'])) {
+				$program_id = $program['program_id'];
+
+				try {
+					$raw = scrape_url(M3_ITEM_INFO . $program_id);
+					if ($raw !== 'false') {
+						$res = json_decode($raw, true);
+					}
+				} catch (Exception $error) {
+					log_message('error', $error);
+				}
+
+				if ($res) {
+					$res = $this->m3->parse_program($res);
+					$res['id'] = $id;
+					$res = $this->m3->replace_program($res);
+				} else {
+					$res = 0;
+				}
+			}
+
+			$prev_id = $id - 1;
+			if ($prev_id > 0) {
+				// redirect('/cron/refresh?id='.$prev_id.'&res='.intval($res));
+				header('Refresh:1;url='.site_url('/cron/refresh?id='.$prev_id.'&res='.intval($res)));
+				exit($res);
+			}
+		}
+
+		$this->load->view('cron', array('output'=>$res));
+	}
+
 	private function cron_timestamp($new_value = null, $name = 'daily-program.cron')
 	{
 		if ($new_value)
