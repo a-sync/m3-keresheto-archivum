@@ -10,7 +10,7 @@ Ha az oldal valamilyen almappán keresztül érhető el az adott hoszton, a [.ht
 ## Adatbázis
 A séma és tábla szerkezetek exportja az [m3.skeleton.sql](.sql/m3.skeleton.sql) fájlban található. Ez MySQL/MariaDB formátumban van de használható más, CI által támogatott adatbázis is.  
 
-Az éles oldalról elérhető naponta frissülő adatbázis export a [/public/m3-db.gz](https://m3.devs.space/public/m3-db.gz) útvonalon.
+Az éles oldalról elérhető hetente frissülő adatbázis export a [/public/m3-db.gz](https://m3.devs.space/public/m3-db.gz) útvonalon, illetve naponta frissülő részleges CSV export a [/public/m3-db.csv.gz](https://m3.devs.space/public/m3-db.csv.gz) útvonalon.
 
 ## Frontend
 Egyetlen oldala van, a kereső és lista.  
