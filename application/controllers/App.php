@@ -13,7 +13,7 @@ class App extends CI_Controller {
 
 		$limit = 10;
 		$offset = intval($this->uri->segment(1)) ? (intval($this->uri->segment(1)) - 1) * $limit : 0;
-		$search = trim($this->input->get('kereses', TRUE));
+		$search = trim((string)$this->input->get('kereses', TRUE));
 		$select = $this->input->get('nyers') === '' ? '*' : false;
 
 		$programs = $this->m3->get_programs($search, $limit, $offset, $select);
