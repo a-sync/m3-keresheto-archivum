@@ -181,7 +181,7 @@ class MY_Pagination extends CI_Pagination {
 			// Remove any specified prefix/suffix from the segment.
 			if ($this->prefix !== '' OR $this->suffix !== '')
 			{
-				$this->cur_page = str_replace(array($this->prefix, $this->suffix), '', $this->cur_page);
+				$this->cur_page = str_replace(array($this->prefix, $this->suffix), '', (string)$this->cur_page);
 			}
 		}
 		else
@@ -190,7 +190,7 @@ class MY_Pagination extends CI_Pagination {
 		}
 
 		// If something isn't quite right, back to the default base page.
-		if ( ! ctype_digit($this->cur_page) OR ($this->use_page_numbers && (int) $this->cur_page === 0))
+		if ( ! ctype_digit((string)$this->cur_page) OR ($this->use_page_numbers && (int) $this->cur_page === 0))
 		{
 			$this->cur_page = $base_page;
 		}
