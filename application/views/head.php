@@ -9,7 +9,9 @@ $_title = 'm3 kereshető archívum';
     <title><?php echo $_title; ?></title>
 
     <meta charset="utf-8">
+    <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="icon" href="<?php echo base_url('public/logo_100_100.png'); ?>" type="image/x-icon"/>
     <link rel="shortcut icon" href="<?php echo base_url('public/logo_100_100.png'); ?>" type="image/x-icon"/>
 

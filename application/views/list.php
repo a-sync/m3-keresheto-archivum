@@ -16,6 +16,7 @@ else
         <thead>
             <tr class="mdc-data-table__header-row">
                 <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">ID</th>
+                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Kép</th>
                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cím / Rövid leírás</th>
                 <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Hossz</th>
             </tr>
@@ -28,6 +29,7 @@ else
             ?>
             <tr class="mdc-data-table__row">
                 <td class="mdc-data-table__cell mdc-data-table__cell--numeric mdc-typography--caption"><?php echo html_escape($i['program_id']); ?></td>
+                <td class="mdc-data-table__cell"><a href="https://nemzetiarchivum.hu/m3/<?php echo html_escape($i['program_id']); ?>" target="_blank"><img width="150" border="0" src="https://nemzetiarchivum.hu/images/m3/<?php echo html_escape($i['program_id']); ?>" /></a></td>
                 <td class="mdc-data-table__cell cell__title">
                     <span class="mdc-typography--headline6 cell__title--title"><?php echo html_escape($i['title']); ?></span>
                     <?php if ($i['subtitle']): ?>
