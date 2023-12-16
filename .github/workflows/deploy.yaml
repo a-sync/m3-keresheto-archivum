@@ -1,0 +1,79 @@
+name: Deploy to server
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  deploy:
+    name: 🚀 Deploy changes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: ✏️ Replace config[base_url]
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          include: "application/config/config.php"
+          regex: false
+          find: "$config['base_url'] = '';"
+          replace: "$config['base_url'] = 'https://m3.devs.space/';"
+
+      - name: ✏️ Replace db[default][hostname]
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          include: "application/config/database.php"
+          regex: false
+          find: "'hostname' => 'db',"
+          replace: "'hostname' => 'localhost',"
+
+      - name: ✏️ Replace db[default][username]
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          include: "application/config/database.php"
+          regex: false
+          find: "'username' => 'root',"
+          replace: "'username' => '${{ secrets.DB_USERNAME }}',"
+
+      - name: ✏️ Replace db[default][password]
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          include: "application/config/database.php"
+          regex: false
+          find: "'password' => 'rootpass',"
+          replace: "'password' => '${{ secrets.DB_PASSWORD }}',"
+
+      - name: ✏️ Replace db[default][database]
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          include: "application/config/database.php"
+          regex: false
+          find: "'database' => 'm3',"
+          replace: "'database' => '${{ secrets.DB_DATABASE }}',"
+
+      - name: ✏️ Replace CI_ENV
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          include: ".htaccess"
+          regex: false
+          find: "SetEnv CI_ENV development"
+          replace: "SetEnv CI_ENV production"
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: "${{ secrets.FTP_HOSTNAME }}"
+          username: "${{ secrets.FTP_USERNAME }}"
+          password: "${{ secrets.FTP_PASSWORD }}"
+          server-dir: "m3-stats/"
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .sql/**
+            .dev/**
+            docker-compose.yml

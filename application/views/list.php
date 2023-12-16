@@ -52,9 +52,9 @@ else
     echo $links;
 }
 
-// https://archivum.mtva.hu/images/m3/M3-87130999959999A59
-// https://archivum.mtva.hu/m3/stream?no_lb=1&target=M3-87130999959999A59
-// if ($i[hasSubtitle]) https://archivum.mtva.hu/subtitle/M3-87130999959999A59.srt
+// https://nemzetiarchivum.hu/images/m3/M3-87130999959999A59
+// https://nemzetiarchivum.hu/m3/stream?no_lb=1&target=M3-87130999959999A59
+// if ($i[hasSubtitle]) https://nemzetiarchivum.hu/subtitle/M3-87130999959999A59.srt
 /* TODO: use layout grid & show all available data for each item (image, extended_info, year, genre, contributors, pg rating, etc...)
 <div class="adopt-a-pup-puppers adopt-a-pup-body mdc-layout-grid">
         <div class="mdc-layout-grid__inner">

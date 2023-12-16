@@ -24,6 +24,17 @@ define('M3_SERIES_INFO',
 define('M3_COLLECTION_INFO', 
 	'https://archivum.mtva.hu/m3/get-open?collection='
 );
+# https://nemzetiarchivum.hu/api/m3/v3/program_guide?days=2
+# https://nemzetiarchivum.hu/m3/get-open?collection=most_viewed
+# https://nemzetiarchivum.hu/m3/get-open
+# https://nemzetiarchivum.hu/api/m3/v3/program_guide?start=
+# https://nemzetiarchivum.hu/api/m3/v3/program_guide?days=2
+#
+# https://nemzetiarchivum.hu/api/m3/v3/daily_program
+# https://nemzetiarchivum.hu/api/m3/v3/item?id=M3-876A8998180999893
+# https://nemzetiarchivum.hu/api/m3/v3/stream?target=live&platform=web&type=m3&mh=1080
+#
+
 
 class Cron extends CI_Controller {
 
@@ -138,7 +149,7 @@ class Cron extends CI_Controller {
 							}
 						}
 
-						$series_ids = extract_ids($raw, '<div class="show-bg" style="background-image: url(https://archivum.mtva.hu/images/m3/', ')"></div>');
+						$series_ids = extract_ids($raw, '<div class="show-bg" style="background-image: url(https://nemzetiarchivum.hu/images/m3/', ')"></div>');
 						$program_ids = array_merge($program_ids, $series_ids);
 					} catch (Exception $error) {
 						@file_put_contents('./backup/series-'.$item['seriesId'].'-'.$i.'-'.date('YmdHis').'.html', $raw);
