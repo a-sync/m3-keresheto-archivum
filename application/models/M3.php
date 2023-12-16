@@ -19,7 +19,29 @@ class M3 extends CI_Model {
             }
             catch(Exception $error)
             {
-                log_message('error', 'Unable to parse program: '.json_encode($program));
+                log_message('error', 'Unable to parse daily program item: '.json_encode($program));
+            }
+		}
+
+        return $programs;
+	}
+
+	public function parse_guides($data)
+	{
+		$programs = array();
+
+        foreach ($data as $daily_guides)
+        {
+            foreach ($daily_guides as $program)
+            {
+                try
+                {
+                    $programs[] = $this->parse_program($program);
+                }
+                catch(Exception $error)
+                {
+                    log_message('error', 'Unable to parse program guide item: '.json_encode($program));
+                }
             }
 		}
 
@@ -33,7 +55,7 @@ class M3 extends CI_Model {
             'info' => implode("\n", $d['info']),
             'extended_info' => implode("\n", $d['extended_info']),
             'title' => $d['title'],
-            'subtitle' => $d['subtitle'],
+            'subtitle' => $d['subtitle'] === false ? '' : $d['subtitle'],
             'description' => $d['description'],
             'short_description' => $d['short_description'],
             'company' => $d['company'],

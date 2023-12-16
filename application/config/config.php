@@ -13,9 +13,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | WARNING: You MUST set this value!
 |
-| If it is not set, then CodeIgniter will try guess the protocol and path
-| your installation, but due to security concerns the hostname will be set
-| to $_SERVER['SERVER_ADDR'] if available, or localhost otherwise.
+| If it is not set, then CodeIgniter will try to guess the protocol and
+| path to your installation, but due to security concerns the hostname will
+| be set to $_SERVER['SERVER_ADDR'] if available, or localhost otherwise.
 | The auto-detection mechanism exists only for convenience during
 | development and MUST NOT be used in production!
 |
@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://localhost/';
 
 /*
 |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ $config['language']	= 'english';
 | This determines which character set is used by default in various methods
 | that require a character set to be provided.
 |
-| See https://secure.php.net/htmlspecialchars for a list of supported charsets.
+| See http://php.net/htmlspecialchars for a list of supported charsets.
 |
 */
 $config['charset'] = 'UTF-8';
@@ -133,7 +133,7 @@ $config['subclass_prefix'] = 'MY_';
 |
 |	$config['composer_autoload'] = '/path/to/vendor/autoload.php';
 |
-| For more information about Composer, please visit https://getcomposer.org/
+| For more information about Composer, please visit http://getcomposer.org/
 |
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
@@ -158,8 +158,6 @@ $config['composer_autoload'] = FALSE;
 | and it will be executed as: ! preg_match('/^[<permitted_uri_chars>]+$/i
 |
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
-|
-| Note: This option is ignored for CLI requests.
 |
 */
 $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
@@ -193,6 +191,20 @@ $config['directory_trigger'] = 'd';
 
 /*
 |--------------------------------------------------------------------------
+| Allow $_GET array
+|--------------------------------------------------------------------------
+|
+| By default CodeIgniter enables access to the $_GET array.  If for some
+| reason you would like to disable it, set 'allow_get_array' to FALSE.
+|
+| WARNING: This feature is DEPRECATED and currently available only
+|          for backwards compatibility purposes!
+|
+*/
+$config['allow_get_array'] = TRUE;
+
+/*
+|--------------------------------------------------------------------------
 | Error Logging Threshold
 |--------------------------------------------------------------------------
 |
@@ -221,7 +233,7 @@ $config['log_threshold'] = 2;
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
-| application/logs/ directory. Use a full server path.
+| application/logs/ directory. Use a full server path with trailing slash.
 |
 */
 $config['log_path'] = '';
@@ -269,7 +281,7 @@ $config['log_date_format'] = 'Y-m-d H:i:s';
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
-| application/views/errors/ directory.  Use a full server path.
+| application/views/errors/ directory.  Use a full server path with trailing slash.
 |
 */
 $config['error_views_path'] = '';
@@ -280,7 +292,7 @@ $config['error_views_path'] = '';
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
-| application/cache/ directory.  Use a full server path.
+| application/cache/ directory.  Use a full server path with trailing slash.
 |
 */
 $config['cache_path'] = '';
@@ -329,6 +341,10 @@ $config['encryption_key'] = '';
 |
 |	The session cookie name, must contain only [0-9a-z_-] characters
 |
+| 'sess_samesite'
+|
+|	Session cookie SameSite attribute: Lax (default), Strict or None
+|
 | 'sess_expiration'
 |
 |	The number of SECONDS you want the session to last.
@@ -369,6 +385,7 @@ $config['encryption_key'] = '';
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
+$config['sess_samesite'] = 'Lax';
 $config['sess_expiration'] = 7200;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
@@ -385,6 +402,7 @@ $config['sess_regenerate_destroy'] = FALSE;
 | 'cookie_path'     = Typically will be a forward slash
 | 'cookie_secure'   = Cookie will only be set if a secure HTTPS connection exists.
 | 'cookie_httponly' = Cookie will only be accessible via HTTP(S) (no javascript)
+| 'cookie_samesite' = Cookie's samesite attribute (Lax, Strict or None)
 |
 | Note: These settings (with the exception of 'cookie_prefix' and
 |       'cookie_httponly') will also affect sessions.
@@ -395,6 +413,35 @@ $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
 $config['cookie_httponly'] 	= FALSE;
+$config['cookie_samesite'] 	= 'Lax';
+
+/*
+|--------------------------------------------------------------------------
+| Standardize newlines
+|--------------------------------------------------------------------------
+|
+| Determines whether to standardize newline characters in input data,
+| meaning to replace \r\n, \r, \n occurrences with the PHP_EOL value.
+|
+| WARNING: This feature is DEPRECATED and currently available only
+|          for backwards compatibility purposes!
+|
+*/
+$config['standardize_newlines'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Global XSS Filtering
+|--------------------------------------------------------------------------
+|
+| Determines whether the XSS filter is always active when GET, POST or
+| COOKIE data is encountered
+|
+| WARNING: This feature is DEPRECATED and currently available only
+|          for backwards compatibility purposes!
+|
+*/
+$config['global_xss_filtering'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -451,6 +498,20 @@ $config['compress_output'] = FALSE;
 |
 */
 $config['time_reference'] = 'local';
+
+/*
+|--------------------------------------------------------------------------
+| Rewrite PHP Short Tags
+|--------------------------------------------------------------------------
+|
+| If your PHP installation does not have short tag support enabled CI
+| can rewrite the tags on-the-fly, enabling you to utilize that syntax
+| in your view files.  Options are TRUE or FALSE (boolean)
+|
+| Note: You need to have eval() enabled for this to work.
+|
+*/
+$config['rewrite_short_tags'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

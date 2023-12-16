@@ -5,36 +5,25 @@ define('MINUMUM_INTERVAL_DAILY', 3600 * 8);
 define('MINUMUM_INTERVAL_WEEKLY', 3600 * 24);
 
 define('M3_DAILY_PROGRAM_URL', 
-	'https://archivum.mtva.hu/m3/daily-program'
+	'https://nemzetiarchivum.hu/api/m3/v3/daily_program'
+);
+define('M3_PROGRAM_GUIDE_URL', 
+	'https://nemzetiarchivum.hu/api/m3/v3/program_guide?days=30'
 );
 
 define('M3_WEEKLY_URL', 
-	'https://archivum.mtva.hu/m3/open'
-);
-define('M3_WEEKLY_GENRE_LIST', 
-	'https://archivum.mtva.hu/m3/get-open?genre='
+	'https://nemzetiarchivum.hu/m3/get-open'
 );
 
 define('M3_ITEM_INFO', 
-	'https://archivum.mtva.hu/m3/item?id='
+	'https://nemzetiarchivum.hu/m3/item?id='
 );
 define('M3_SERIES_INFO', 
-	'https://archivum.mtva.hu/m3/open?series='
+	'https://nemzetiarchivum.hu/m3/open?series='
 );
 define('M3_COLLECTION_INFO', 
-	'https://archivum.mtva.hu/m3/get-open?collection='
+	'https://nemzetiarchivum.hu/m3/get-open?collection='
 );
-# https://nemzetiarchivum.hu/api/m3/v3/program_guide?days=2
-# https://nemzetiarchivum.hu/m3/get-open?collection=most_viewed
-# https://nemzetiarchivum.hu/m3/get-open
-# https://nemzetiarchivum.hu/api/m3/v3/program_guide?start=
-# https://nemzetiarchivum.hu/api/m3/v3/program_guide?days=2
-#
-# https://nemzetiarchivum.hu/api/m3/v3/daily_program
-# https://nemzetiarchivum.hu/api/m3/v3/item?id=M3-876A8998180999893
-# https://nemzetiarchivum.hu/api/m3/v3/stream?target=live&platform=web&type=m3&mh=1080
-#
-
 
 class Cron extends CI_Controller {
 
@@ -55,24 +44,40 @@ class Cron extends CI_Controller {
 			$this->load->model('m3');
 			$this->load->helper('curl');
 
-			$raw = '';
+			$raw1 = '';
+			$new1 = 0;
 			try
 			{
-				$raw = scrape_url(M3_DAILY_PROGRAM_URL);
-				$res = json_decode($raw, true);
-				$res = $this->m3->parse_programs($res['program']);
-				$res = $this->m3->insert_ignore_programs($res);
+				$raw1 = scrape_url(M3_DAILY_PROGRAM_URL);
+				$res1 = json_decode($raw1, true);
+				$res1 = $this->m3->parse_programs($res1['program']);
+				$new1 = $this->m3->insert_ignore_programs($res1);
 			}
 			catch(Exception $error)
 			{
-				@file_put_contents('./backup/daily-'.date('YmdHis').'.json', $raw);
+				@file_put_contents('./backup/daily-program'.date('YmdHis').'.json', $raw1);
+				show_error($error);
+			}
+
+			$raw2 = '';
+			$new2 = 0;
+			try
+			{
+				$raw2 = scrape_url(M3_PROGRAM_GUIDE_URL);
+				$res2 = json_decode($raw2, true);
+				$res2 = $this->m3->parse_guides($res2['program_guides']);
+				$new2 = $this->m3->insert_ignore_programs($res2);
+			}
+			catch(Exception $error)
+			{
+				@file_put_contents('./backup/program-guide'.date('YmdHis').'.json', $raw2);
 				show_error($error);
 			}
 
 			$this->cron_timestamp($curr_timestamp);
-			log_message('debug', 'DAILY CRON: '.$res.' new items');
-			
-			$this->load->view('cron', array('output'=>$res));
+			log_message('debug', 'DAILY CRON: '.$new1.' + '.$new2.' new items');
+
+			$this->load->view('cron', array('output'=>$new1.' + '.$new2));
 		}
 		else 
 		{
@@ -95,10 +100,13 @@ class Cron extends CI_Controller {
 			$this->load->helper('parser');
 
 			$raw = '';
+			$coll_list = [];
 			try
 			{
 				$raw = scrape_url(M3_WEEKLY_URL);
-				$coll_list = extract_ids($raw, ' data-collection="', '">');
+				$res = json_decode($raw, true);
+				$coll_list = array_column($res, 'id');
+				// $coll_list[] = 'most_viewed';
 			}
 			catch(Exception $error)
 			{
@@ -120,12 +128,12 @@ class Cron extends CI_Controller {
 
 			$res = $this->_parse_genre_list_items($coll_list_items);
 			$res = $this->m3->parse_programs($res);
-			$res = $this->m3->insert_ignore_programs($res);
+			$new = $this->m3->insert_ignore_programs($res);
 
 			$this->cron_timestamp($curr_timestamp, 'weekly-program.cron');
-			log_message('debug', 'WEEKLY CRON: '.$res.' new items');
+			log_message('debug', 'WEEKLY CRON: '.$new.' new items');
 
-			$this->load->view('cron', array('output'=>$res));
+			$this->load->view('cron', array('output'=>$new));
 		}
 		else 
 		{

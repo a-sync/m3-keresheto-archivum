@@ -1,31 +1,21 @@
-name: Ping URL Daily
+name: cron/daily
 on:
+  workflow_dispatch:
   schedule:
-    - cron:  '0 0 * * *'  # This will run the job every day at midnight
+    - cron: '0 */8 * * *'
 
 jobs:
-  ping:
+  cronjob:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping URL
-        run: |
-          URL="http://your-web-url"  # The URL you want to ping
-          RESPONSE=$(curl -f -s -w "%{http_code}" -o response.txt $URL || echo "Failed")
-          CONTENT=$(cat response.txt)
-          echo "HTTP Status Code: $RESPONSE"
-          echo "Content: $CONTENT"
-          if [ "$RESPONSE" == "Failed" ]; then exit 1; fi
-
-###########################################################
-
-    steps:
-      - name: Make Request
-        id: myRequest
+      - name: 🙏 Make Request
+        id: req
         uses: fjogeleit/http-request-action@v1
         with:
-          url: http://yoursite.com/api
+          url: http://m3.devs.space/cron/daily
           method: GET
-      - name: Show Response
+      - name: 🤲 Show Response
         run: |
-          echo ${{ steps.myRequest.outputs.response }}
-          echo ${{ steps.myRequest.outputs.headers }}
+          echo ${{ steps.req.outputs.response }}
+          echo .
+          echo ${{ steps.req.outputs.headers }}

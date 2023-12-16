@@ -52,183 +52,179 @@ else
     echo $links;
 }
 
-// https://nemzetiarchivum.hu/images/m3/M3-87130999959999A59
-// https://nemzetiarchivum.hu/m3/stream?no_lb=1&target=M3-87130999959999A59
-// if ($i[hasSubtitle]) https://nemzetiarchivum.hu/subtitle/M3-87130999959999A59.srt
 /* TODO: use layout grid & show all available data for each item (image, extended_info, year, genre, contributors, pg rating, etc...)
-<div class="adopt-a-pup-puppers adopt-a-pup-body mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/1.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Monty</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Monty enjoys chicken treats and cuddling while watching Seinfeld.</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/2.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Jubilee</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Jubilee enjoys thoughtful discussions by the campfire.</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/3.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Beezy</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Beezy's favorite past-time is helping you choose your brand color.</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/4.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Mochi</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Mochi is the perfect "rubbery ducky" debugging pup, always listening.</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/5.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Brewery</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Brewery loves fetching you your favorite homebrew.</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/6.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Lucy</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Picture yourself in a boat on a river, Lucy is a pup with kaleidoscope eyes.</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/7.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Astro</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Is it a bird? A plane? No, it's Astro blasting off into your heart!</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/8.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Boo</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Boo is just a teddy bear in disguise. What he lacks in grace, he makes up in charm.</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/9.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Pippa</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Pippa likes to look out the window and write pup-poetry</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/10.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Coco</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Coco enjoys getting pampered at the local puppy spa.</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/11.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Brody</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Brody is a good boy, waiting for your next command.</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mdc-layout-grid__cell">
-            <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
-              <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/12.jpg')"></div>
-              <div class="adopt-a-pup-card__text-label">Stella</div>
-              <div class="adopt-a-pup-card__secondary mdc-typography--body2">Stella! Calm and always up for a challenge, she's the perfect companion.</div>
-              <div class="mdc-card__actions">
-                <div class="mdc-card__action-buttons">
-                  <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
-                    <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
-                  </button>
-                </div>
-              </div>
+  <div class="adopt-a-pup-puppers adopt-a-pup-body mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/1.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Monty</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Monty enjoys chicken treats and cuddling while watching Seinfeld.</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
             </div>
           </div>
         </div>
       </div>
-      */
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/2.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Jubilee</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Jubilee enjoys thoughtful discussions by the campfire.</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/3.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Beezy</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Beezy's favorite past-time is helping you choose your brand color.</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/4.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Mochi</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Mochi is the perfect "rubbery ducky" debugging pup, always listening.</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/5.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Brewery</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Brewery loves fetching you your favorite homebrew.</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/6.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Lucy</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Picture yourself in a boat on a river, Lucy is a pup with kaleidoscope eyes.</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/7.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Astro</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Is it a bird? A plane? No, it's Astro blasting off into your heart!</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/8.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Boo</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Boo is just a teddy bear in disguise. What he lacks in grace, he makes up in charm.</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/9.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Pippa</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Pippa likes to look out the window and write pup-poetry</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/10.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Coco</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Coco enjoys getting pampered at the local puppy spa.</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/11.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Brody</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Brody is a good boy, waiting for your next command.</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mdc-layout-grid__cell">
+        <div class="mdc-card mdc-card--outlined adopt-a-pup-card">
+          <div class="adopt-a-pup-image mdc-card__media mdc-card__media--square" style="background-image: url('./media/12.jpg')"></div>
+          <div class="adopt-a-pup-card__text-label">Stella</div>
+          <div class="adopt-a-pup-card__secondary mdc-typography--body2">Stella! Calm and always up for a challenge, she's the perfect companion.</div>
+          <div class="mdc-card__actions">
+            <div class="mdc-card__action-buttons">
+              <button class="mdc-button mdc-card__action mdc-card__action--button adopt-form__button">
+                <i class="material-icons mdc-button__icon adopt-form__button-icon">pets</i> <span class="adopt-form__button-text">Adopt</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+*/

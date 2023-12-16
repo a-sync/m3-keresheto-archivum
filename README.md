@@ -2,12 +2,19 @@
 
 ## Telepítés / futtatás
 CodeIgniter 3.1 keretrendszert használ az alkalmazás. (minimum PHP 5.6 javasolt)  
-
-Az adatbázis beállításai a [database.php](application/config/database.php#L76) fájlban találhatók.
-
 Ha az oldal valamilyen almappán keresztül érhető el az adott hoszton, a [.htaccess](.htaccess#L10) fájlban a `RewriteBase /` sort szerkeszteni kell és átírni a megfelelő útvonalra.  
 
+Fejlesztő környezet kulcsrakész beindításához elegendő: `docker-compose up`, amivel az alábbi szolgáltatások indulnak:
+ * webszerver **localhost:80**
+ * adminer: **localhost:8080**
+    - server: `db`
+    - username: `root`
+    - password: `rootpass`
+    - database: `m3`
+ * adatbázis: **localhost:3306**
+
 ## Adatbázis
+Az adatbázis beállításai a [database.php](application/config/database.php#L76) fájlban találhatók.  
 A séma és tábla szerkezetek exportja az [m3.skeleton.sql](.sql/m3.skeleton.sql) fájlban található. Ez MySQL/MariaDB formátumban van de használható más, CI által támogatott adatbázis is.  
 
 Az éles oldalról elérhető hetente frissülő adatbázis export a [/public/m3-db.gz](https://m3.devs.space/public/m3-db.gz) útvonalon, illetve naponta frissülő részleges CSV export a [/public/m3-db.csv.gz](https://m3.devs.space/public/m3-db.csv.gz) útvonalon.
@@ -15,6 +22,8 @@ Az éles oldalról elérhető hetente frissülő adatbázis export a [/public/m3
 ## Frontend
 Egyetlen oldala van, a kereső és lista.  
 A kereső minden rögzített adatban keres, nem csupán abban ami megjelenik, a műsorok sorrendje a közzétételük időpontjának megfelelő.  
+
+A `nyers` paraméter hozzáadása az URL-hez megjeleníti az összes adatot. (`?nyers` vagy `&nyers` utótag)
 
 ### Layout
 A material-components-web CSS framework m3 színeivel tematizált változata: [m3-material-components-web](http://github.com/a-sync/m3-material-components-web).

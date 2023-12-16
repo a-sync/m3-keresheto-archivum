@@ -1,4 +1,4 @@
-name: Deploy to server
+name: Deploy to m3.devs.space
 
 on:
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
         with:
           include: "application/config/config.php"
           regex: false
-          find: "$config['base_url'] = '';"
+          find: "$config['base_url'] = 'http://localhost/';"
           replace: "$config['base_url'] = 'https://m3.devs.space/';"
 
       - name: ✏️ Replace db[default][hostname]
@@ -56,13 +56,13 @@ jobs:
           find: "'database' => 'm3',"
           replace: "'database' => '${{ secrets.DB_DATABASE }}',"
 
-      - name: ✏️ Replace CI_ENV
-        uses: jacobtomlinson/gha-find-replace@v3
-        with:
-          include: ".htaccess"
-          regex: false
-          find: "SetEnv CI_ENV development"
-          replace: "SetEnv CI_ENV production"
+      # - name: ✏️ Replace CI_ENV
+      #   uses: jacobtomlinson/gha-find-replace@v3
+      #   with:
+      #     include: ".htaccess"
+      #     regex: false
+      #     find: "SetEnv CI_ENV development"
+      #     replace: "SetEnv CI_ENV production"
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
@@ -70,7 +70,7 @@ jobs:
           server: "${{ secrets.FTP_HOSTNAME }}"
           username: "${{ secrets.FTP_USERNAME }}"
           password: "${{ secrets.FTP_PASSWORD }}"
-          server-dir: "m3-stats/"
+          server-dir: "m3/"
           exclude: |
             **/.git*
             **/.git*/**
