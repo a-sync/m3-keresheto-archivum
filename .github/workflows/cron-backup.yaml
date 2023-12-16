@@ -1,8 +1,8 @@
-name: cron/daily
+name: cron/backup
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */8 * * *'
+    - cron: '30 8 * * 5'
 
 jobs:
   cronjob:
@@ -12,7 +12,7 @@ jobs:
         id: req
         uses: fjogeleit/http-request-action@v1
         with:
-          url: http://m3.devs.space/cron/daily
+          url: http://m3.devs.space/cron/backup
           method: GET
       - name: 🤲 Show Response
         run: |

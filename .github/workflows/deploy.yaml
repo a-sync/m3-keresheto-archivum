@@ -24,6 +24,14 @@ jobs:
           find: "$config['base_url'] = 'http://localhost/';"
           replace: "$config['base_url'] = 'https://m3.devs.space/';"
 
+      - name: ✏️ Replace config[log_threshold]
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          include: "application/config/config.php"
+          regex: false
+          find: "$config['log_threshold'] = 2;"
+          replace: "$config['log_threshold'] = 1;"
+
       - name: ✏️ Replace db[default][hostname]
         uses: jacobtomlinson/gha-find-replace@v3
         with:
@@ -65,15 +73,15 @@ jobs:
       #     replace: "SetEnv CI_ENV production"
 
       - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        uses: SamKirkland/FTP-Deploy-Action@4.3.4
         with:
           server: "${{ secrets.FTP_HOSTNAME }}"
           username: "${{ secrets.FTP_USERNAME }}"
           password: "${{ secrets.FTP_PASSWORD }}"
-          server-dir: "m3/"
           exclude: |
             **/.git*
             **/.git*/**
             .sql/**
             .dev/**
             docker-compose.yml
+            *.cron
