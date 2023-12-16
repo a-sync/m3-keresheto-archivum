@@ -2,24 +2,24 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Pagination extends CI_Pagination {
-    protected $reuse_query_string = true;
-    protected $use_page_numbers = true;
-    protected $prev_link = ' <i class="mdi mdi-chevron-left"></i>';
-    protected $next_link = '<i class="mdi mdi-chevron-right"></i> ';
-    protected $first_link = '<i class="mdi mdi-chevron-triple-left"></i> ';
-    protected $last_link = ' <i class="mdi mdi-chevron-triple-right"></i>';
-    protected $full_tag_open = '<div class="paginator__wrapper">';
-    protected $full_tag_close = '</div>';
-    protected $num_tag_open = '';
-    protected $num_tag_close = '';
-    protected $cur_tag_open = '<a href="" class="mdc-button mdc-button--unelevated"> <span class="mdc-button__ripple"></span> ';
-    protected $cur_tag_close = '</a>';
-    protected $next_tag_open = '';
-    protected $next_tag_close = '';
-    protected $prev_tag_open = '';
-    protected $prev_tag_close = '';
-    protected $_attributes__class = 'mdc-button';
-    protected $_links_inner = ' <span class="mdc-button__ripple"></span> ';
+	protected $reuse_query_string = true;
+	protected $use_page_numbers = true;
+	protected $prev_link = ' <i class="mdi mdi-chevron-left"></i>';
+	protected $next_link = '<i class="mdi mdi-chevron-right"></i> ';
+	protected $first_link = '<i class="mdi mdi-chevron-triple-left"></i> ';
+	protected $last_link = ' <i class="mdi mdi-chevron-triple-right"></i>';
+	protected $full_tag_open = '<div class="paginator__wrapper">';
+	protected $full_tag_close = '</div>';
+	protected $num_tag_open = '';
+	protected $num_tag_close = '';
+	protected $cur_tag_open = '<a href="" class="mdc-button mdc-button--unelevated"> <span class="mdc-button__ripple"></span> ';
+	protected $cur_tag_close = '</a>';
+	protected $next_tag_open = '';
+	protected $next_tag_close = '';
+	protected $prev_tag_open = '';
+	protected $prev_tag_close = '';
+	protected $_attributes__class = 'mdc-button';
+	protected $_links_inner = ' <span class="mdc-button__ripple"></span> ';
 
 	/**
 	 * Constructor
@@ -36,7 +36,7 @@ class MY_Pagination extends CI_Pagination {
 
 		parent::initialize($params);
 		log_message('info', 'Pagination Class Initialized');
-    }
+	}
 
 	/**
 	 * Parse attributes
@@ -52,17 +52,17 @@ class MY_Pagination extends CI_Pagination {
 			: array();
 		unset($attributes['rel']);
 
-        $attributes['class'] = isset($attributes['class']) ? $attributes['class'].' ' : '';
-        $attributes['class'] .= $this->_attributes__class;
+		$attributes['class'] = isset($attributes['class']) ? $attributes['class'].' ' : '';
+		$attributes['class'] .= $this->_attributes__class;
 
 		$this->_attributes = '';
 		foreach ($attributes as $key => $value)
 		{
 			$this->_attributes .= ' '.$key.'="'.$value.'"';
 		}
-    }
-    
-    	/**
+	}
+	
+		/**
 	 * Generate the pagination links
 	 *
 	 * @return	string

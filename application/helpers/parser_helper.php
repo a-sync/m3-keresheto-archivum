@@ -17,5 +17,5 @@ if ( ! function_exists('extract_ids')) {
 		}
 
 		return $array;
-    }
+	}
 }
