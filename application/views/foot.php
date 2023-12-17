@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="https://unpkg.com/srt-webvtt@latest/lib/index.js"></script>
 	<script type="text/javascript">
 		async function initPlayer(videoElement) {
-			console.log('initPlayer', videoElement.dataset.programid)
+			console.log('init player', videoElement.dataset.programid);
 
 			const vidRes = await fetch(String('\x68\x74\x74\x70\x73\x3a\x2f\x2f\x6e\x65\x6d\x7a\x65\x74\x69\x61\x72\x63\x68\x69\x76\x75\x6d\x2e\x68\x75\x2f\x6d\x33\x2f\x73\x74\x72\x65\x61\x6d\x3f\x6e\x6f\x5f\x6c\x62\x3d\x31\x26\x74\x61\x72\x67\x65\x74\x3d')+videoElement.dataset.programid);
 			const resJson = await vidRes.json();
@@ -35,7 +35,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				player.addRemoteTextTrack({src: trackUrl, srclang: 'hu', label: 'Magyar'}, false);
 			}
 
-			player.play();
+			player.ready(() => {
+				console.log('player ready', videoElement.dataset.programid);
+				player.play();
+			});
 
 			return false;
 		}
@@ -46,6 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			const videoElements = document.querySelectorAll('.video-js');
 			
 			for (const el of videoElements) {
+				console.log('add listener', el.dataset.programid);
+
 				el.addEventListener('click', () => initPlayer(el), {
 					once: true,
 					useCapture: false
