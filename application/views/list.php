@@ -38,7 +38,6 @@ else
 						controls
 						preload="none"
 						poster="https://nemzetiarchivum.hu/images/m3/<?php echo html_escape($i['program_id']); ?>"
-						data-setup='{"language":"hu","fullscreen":{"options":{"navigationUI":"show"}},"fluid":true}'
 					></video>
 				</td>
 				<td class="mdc-data-table__cell cell__title">

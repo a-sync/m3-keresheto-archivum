@@ -45,15 +45,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		const domLoaded = () => {
 			console.log('DOM loaded');
-			
 			const videoElements = document.querySelectorAll('.video-js');
 			
 			for (const el of videoElements) {
-				console.log('add listener', el.dataset.programid);
-
-				el.addEventListener('click', () => initPlayer(el), {
-					once: true,
-					useCapture: false
+				const player = videojs(el.id, {
+					"language": "hu",
+					"fullscreen": {
+						"options": {
+							"navigationUI": "show"
+						}
+					},
+					"fluid": true
+				}, () => {
+					console.log('add listener', el.dataset.programid);
+					player.one('click', () => initPlayer(el));
 				});
 			}
 		};
