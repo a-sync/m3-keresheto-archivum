@@ -64,3 +64,9 @@ footer {
     text-align: center;
     color: var(--mdc-theme-text-disabled-on-dark);
 }
+.cell__player .video-js {
+    width: 300px;
+}
+.cell__player .vjs-menu-button-popup .vjs-menu {
+    width: 12em;
+}

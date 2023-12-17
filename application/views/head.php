@@ -12,17 +12,16 @@ $_title = 'm3 kereshető archívum';
 	<meta name="referrer" content="no-referrer">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="icon" href="<?php echo base_url('public/logo_100_100.png'); ?>" type="image/x-icon"/>
-	<link rel="shortcut icon" href="<?php echo base_url('public/logo_100_100.png'); ?>" type="image/x-icon"/>
+	<link rel="icon" href="<?php echo base_url('public/logo_100_100.png'); ?>" type="image/x-icon">
+	<link rel="shortcut icon" href="<?php echo base_url('public/logo_100_100.png'); ?>" type="image/x-icon">
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 	<link href="https://unpkg.com/@mdi/font@latest/css/materialdesignicons.min.css" rel="stylesheet">
+	<link href="https://unpkg.com/video.js@latest/dist/video-js.min.css" rel="stylesheet">
 	<link href="<?php echo base_url('public/m3.min.css'); ?>" rel="stylesheet">
 	<link href="<?php echo base_url('public/app.css'); ?>" rel="stylesheet">
-
 </head>
 <body class="mdc-typography">
-
 	<header>
 		<h1 class="mdc-typography--headline5"><?php echo $_title; ?></h1>
 	</header>

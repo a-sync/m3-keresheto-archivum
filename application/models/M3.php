@@ -150,7 +150,8 @@ class M3 extends CI_Model
 				'episode',
 				'episodes',
 				'short_description',
-				'duration'
+				'duration',
+				'hasSubtitle'
 			);
 		}
 	
