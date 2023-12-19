@@ -15,8 +15,7 @@ else
 	<table class="mdc-data-table__table">
 		<thead>
 			<tr class="mdc-data-table__header-row">
-				<th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">ID</th>
-				<th class="mdc-data-table__header-cell" role="columnheader" scope="col">🎞</th>
+				<th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">🎞ID</th>
 				<th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cím / Rövid leírás</th>
 				<th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Hossz</th>
 			</tr>
@@ -28,17 +27,18 @@ else
 				$m = intval($duration[1]) ? intval($duration[1]).'p' : '';
 			?>
 			<tr class="mdc-data-table__row">
-				<td class="mdc-data-table__cell mdc-data-table__cell--numeric mdc-typography--caption"><?php echo html_escape($i['program_id']); ?></td>
-				<td class="mdc-data-table__cell cell__player">
-					<video
-						id="vid-<?php echo html_escape(strtolower($i['program_id'])); ?>"
-						data-programid="<?php echo html_escape($i['program_id']); ?>"
-						data-hassubtitle="<?php echo html_escape($i['hasSubtitle']); ?>"
-						class="video-js"
-						controls
-						preload="none"
-						poster="https://nemzetiarchivum.hu/images/m3/<?php echo html_escape($i['program_id']); ?>"
-					></video>
+				<td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+					<div class="m3id"><?php echo html_escape($i['program_id']); ?></div>
+					<div class="m3player">
+						<video
+							id="vid-<?php echo html_escape(strtolower($i['program_id'])); ?>"
+							data-programid="<?php echo html_escape($i['program_id']); ?>"
+							data-hassubtitle="<?php echo html_escape($i['hasSubtitle']); ?>"
+							class="video-js"
+							preload="none"
+							poster="https://nemzetiarchivum.hu/images/m3/<?php echo html_escape($i['program_id']); ?>"
+						></video>
+					</div>
 				</td>
 				<td class="mdc-data-table__cell cell__title">
 					<span class="mdc-typography--headline6 cell__title--title"><?php echo html_escape($i['title']); ?></span>

@@ -46,8 +46,6 @@ h1 {
     white-space: normal;
     word-wrap: break-word;
 }
-.cell__title--title {
-}
 .cell__title--subtitle {
     font-style: italic;
 }
@@ -64,9 +62,42 @@ footer {
     text-align: center;
     color: var(--mdc-theme-text-disabled-on-dark);
 }
-.cell__player .video-js {
-    width: 300px;
+.m3id {
+    user-select: all;
+    text-align: center;
+    line-height: 2rem;
 }
-.cell__player .vjs-menu-button-popup .vjs-menu {
+.m3player {
+    text-align: center;
+    position: relative;
+    min-width: 300px;
+}
+.m3player .vjs-menu-button-popup .vjs-menu {
     width: 12em;
+}
+.m3player .m3player-overlay {
+    position: absolute;
+    color: white;
+    text-shadow: 1px 1px black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.4);
+    border-radius: 2px;
+    padding: 1px 4px 0 4px;
+    line-height: 1.1rem;
+}
+
+.vjs-modal-dialog.vjs-text-track-settings {
+    height: 100%;
+}
+.vjs-text-track-settings .vjs-modal-dialog-content {
+    grid: none;
+    padding: 0;
+}
+.vjs-text-track-settings .vjs-modal-dialog-content fieldset {
+    margin: 10px 0;
+}
+.vjs-text-track-settings .vjs-track-settings-controls {
+    text-align: center;
 }
