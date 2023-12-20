@@ -23,7 +23,10 @@ Az éles oldalról elérhető hetente frissülő adatbázis export a [/public/m3
 Egyetlen oldala van, a kereső és lista.  
 A kereső minden rögzített adatban keres, nem csupán abban ami megjelenik, a műsorok sorrendje a közzétételük időpontjának megfelelő.  
 
-A `nyers` paraméter hozzáadása az URL-hez megjeleníti az összes adatot. (`?nyers` vagy `&nyers` utótag)
+Új műsor manuális felvételéhez, a kereső mezőben megadható egy vagy több műsor azonosító vesszővel elválasztva.  
+*pl.: M3-123456789,M3-987654321*  
+
+A `nyers` paraméter hozzáadása az URL-hez megjeleníti az összes tárolt adatot. (`?nyers` vagy `&nyers` utótag)
 
 ### Layout
 A material-components-web CSS framework m3 színeivel tematizált változata: [m3-material-components-web](http://github.com/a-sync/m3-material-components-web).
@@ -31,21 +34,21 @@ A material-components-web CSS framework m3 színeivel tematizált változata: [m
 ## Backend
 Két cronjob letölti, feldolgozza és az adatbázisban rögzíti az aktuálisan elérhető műsorokat.  
 Két másik adatbázis biztonsági mentést, és részleges CSV exportot hoz létre.  
-Egy aloldal pedig műsorok hozzáadását teszi lehetővé M3-* azonosító megadásával.   
+Egy aloldal pedig műsorok hozzáadását teszi lehetővé M3-* azonosító megadásával.  
 
-#### Napi műsorok frissítése
+#### [Napi műsor frissítések](https://github.com/a-sync/m3-keresheto-archivum/actions/workflows/cron-daily.yaml)
 Útvonal: **/cron/daily**  
-A naponta frissülő műsorlistát ellenőrzi.  
+A naponta frissülő műsorlistát és a nyolc napos műsorlistát ellenőrzi.  
 
-#### Heti műsorok frissítése
+#### [Heti műsor frissítések](https://github.com/a-sync/m3-keresheto-archivum/actions/workflows/cron-weekly.yaml)
 Útvonal: **/cron/weekly**  
-A hetente frissülő műsorlistát ellenőrzi.  
+A hetente frissülő műsorlista válogatást ellenőrzi.  
 
-#### Biztonsági mentés (heti)
+#### [Biztonsági mentések](https://github.com/a-sync/m3-keresheto-archivum/actions/workflows/cron-backup.yaml)
 Útvonal: **/cron/backup**  
 A teljes adatbázist exportálja a **/public/m3-db.gz** tömörített fájlba.  
 
-#### CSV export (napi)
+#### [CSV exportok](https://github.com/a-sync/m3-keresheto-archivum/actions/workflows/cron-csv.yaml)
 Útvonal: **/cron/csv**  
 Az alábbi mezőket exportálja a **/public/m3-db.csv.gz** tömörített fájlba.  
  * program_id

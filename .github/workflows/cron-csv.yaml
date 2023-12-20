@@ -17,5 +17,13 @@ jobs:
           contentType: text/plain
           timeout: 30000
       - name: 🤲 Show Response
+        env:
+          RES_BODY: ${{ steps.req.outputs.response }}
+          RES_HEADERS: ${{ steps.req.outputs.headers }}
         run: |
-          echo ${{ steps.req.outputs.response }}
+          echo '### 📦 Response body' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "$RES_BODY" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo '### 📋 Response headers:' >> $GITHUB_STEP_SUMMARY
+          echo "    $RES_HEADERS" >> $GITHUB_STEP_SUMMARY

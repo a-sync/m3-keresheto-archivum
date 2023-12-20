@@ -87,8 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					if (releaseDate) {
 						playableDate = new Date(releaseDate);
 						//🧀🤫
-						playableDate.setDate(playableDate.getDate()-2);
-						playableDate.setHours(17, 0, 0, 0);
+						playableDate.setDate(playableDate.getDate()-1);
 					}
 
 					if (playableDate && playableDate <= new Date()) {

@@ -28,7 +28,9 @@ class App extends CI_Controller {
 
 		$links = $this->pagination->create_links();
 
-		$this->load->view('head');
+		$this->load->view('head', array(
+			'search' => $search
+		));
 		$this->load->view('search', array(
 			'search' => $search
 		));

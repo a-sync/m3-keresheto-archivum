@@ -157,16 +157,29 @@ class M3 extends CI_Model
 	
 		if ($search)
 		{
-			$this->db
-				->like('title', $search)
-				->or_like('subtitle', $search)
-				->or_like('info', $search)
-				->or_like('extended_info', $search)
-				->or_like('description', $search)
-				->or_like('creators', $search)
-				->or_like('contributors', $search)
-				->or_like('genre', $search)
-				->or_where('program_id', $search);
+			if (strlen($search) > 3 && substr(strtoupper($search), 0, 3) === 'M3-') {
+				$pids = explode(',', $search);
+	
+				$program_ids = [];
+				foreach($pids as $pid) {
+					if (substr(trim($pid),0,3) === 'M3-') {
+						$program_ids[] = trim($pid);
+					}
+				}
+
+				$this->db->where_in('program_id', $program_ids);
+			} else {
+				$this->db
+					->like('title', $search)
+					->or_like('subtitle', $search)
+					->or_like('info', $search)
+					->or_like('extended_info', $search)
+					->or_like('description', $search)
+					->or_like('creators', $search)
+					->or_like('contributors', $search)
+					->or_like('genre', $search)
+					->or_where('program_id', $search);
+			}
 		}
 	
 		$total = $this->db

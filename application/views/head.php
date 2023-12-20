@@ -2,6 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $_title = 'm3 kereshető archívum';
+if ($search) {
+	$_title = html_escape($search) . ' - ' . $_title;
+}
 
 ?><!DOCTYPE html>
 <html>

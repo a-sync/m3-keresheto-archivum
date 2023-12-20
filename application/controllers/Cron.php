@@ -205,7 +205,7 @@ class Cron extends CI_Controller {
 			if ($res) {
 				$this->cron_timestamp($curr_timestamp, 'backup.cron');
 				$res = get_file_info('./public/m3-db.gz');
-				$res = print_r($res, true);
+				$res = json_encode($res);
 				log_message('debug', 'BACKUP: '.$res);
 			} else {
 				log_message('error', 'BACKUP FAILED');
@@ -238,7 +238,7 @@ class Cron extends CI_Controller {
 			if ($res) {
 				$this->cron_timestamp($curr_timestamp, 'csv.cron');
 				$res = get_file_info('./public/m3-db.csv.gz');
-				$res = print_r($res, true);
+				$res = json_encode($res);
 				log_message('debug', 'CSV: '.$res);
 			} else {
 				log_message('error', 'CSV FAILED');
@@ -255,12 +255,12 @@ class Cron extends CI_Controller {
 	public function add() {
 		$this->load->model('m3');
 		$this->load->helper('curl');
-		$ids = explode(',', $this->input->get('id'));
+		$ids = explode(',', strval($this->input->get('id')));
 
 		$program_ids = [];
 		foreach($ids as $id) {
-			if (substr($id,0,3) === 'M3-') {
-				$program_ids[] = $id;
+			if (substr(trim($id),0,3) === 'M3-') {
+				$program_ids[] = trim($id);
 			}
 		}
 

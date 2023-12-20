@@ -17,9 +17,26 @@ h1 {
 #search-field {
     width: 66vw;
 }
-#search-form .mdi-magnify {
+#search-form .mdc-text-field__icon {
     font-size: 1.7rem;
     cursor: auto;
+}
+#search-form.searching {
+    pointer-events: none;
+}
+#search-form.searching .mdc-text-field__icon::before {
+    animation-name: spin;
+    animation-duration: 3000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 .list__total {
     text-align: center;
