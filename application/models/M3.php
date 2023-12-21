@@ -57,20 +57,33 @@ class M3 extends CI_Model
 
 	public function parse_program($d)
 	{
+		$release_ts = 0;
+		$release_dts_fields = ['start_playable_dts', 'start_startTime_dts'];
+		foreach ($release_dts_fields as $key) {
+			if (isset($d[$key]) && is_array($d[$key]) && count($d[$key]) > 0) {
+				foreach ($d[$key] as $dts) {
+					$t = strtotime($dts);  
+					if ($release_ts === 0 || $t < $release_ts) {
+						$release_ts = $t;
+					}
+				}
+			}
+		}
+
 		return array(
 			'program_id' => $d['id'],
-			'info' => implode("\n", $d['info']),
-			'extended_info' => implode("\n", $d['extended_info']),
-			'title' => $d['title'],
-			'subtitle' => $d['subtitle'] === false ? '' : $d['subtitle'],
-			'description' => $d['description'],
-			'short_description' => $d['short_description'],
-			'company' => $d['company'],
+			'info' => trim(implode("\n", $d['info'])),
+			'extended_info' => trim(implode("\n", $d['extended_info'])),
+			'title' => trim($d['title']),
+			'subtitle' => trim($d['subtitle']) ? trim($d['subtitle']) : '',
+			'description' => trim($d['description']),
+			'short_description' => trim($d['short_description']),
+			'company' => trim($d['company']),
 			'year' => intval($d['year']),
-			'country' => $d['country'],
-			'creators' => implode("\n", $d['creators']),
-			'contributors' => implode("\n", $d['contributors']),
-			'genre' => implode("\n", $d['genre']),
+			'country' => trim($d['country']),
+			'creators' => trim(implode("\n", $d['creators'])),
+			'contributors' => trim(implode("\n", $d['contributors'])),
+			'genre' => trim(implode("\n", $d['genre'])),
 			'quality' => is_null($d['quality']) ? '' : $d['quality'],
 			'pg' => is_null($d['pg']) ? '' : $d['pg'],
 			'duration' => $d['duration'],
@@ -79,7 +92,8 @@ class M3 extends CI_Model
 			'isSeries' => boolval($d['isSeries']),
 			'seriesId' => base64_decode($d['seriesId']) ?: '',
 			'episode' => intval($d['episode']),
-			'episodes' => intval($d['episodes'])
+			'episodes' => intval($d['episodes']),
+			'released' => $release_ts ? date('Y-m-d H:i:s', $release_ts) : '0000-00-00 00:00:00'
 		);
 	}
 
@@ -146,12 +160,27 @@ class M3 extends CI_Model
 				'program_id',
 				'title',
 				'subtitle',
+				'info',
+				'extended_info',
+				'short_description',
+				'description',
+				'company',
+				'year',
+				'country',
+				'creators',
+				'contributors',
+				'genre',
+				'quality',
+				'pg',
+				'duration',
+				'ratio',
+				'hasSubtitle',
 				'isSeries',
+				'seriesId',
 				'episode',
 				'episodes',
-				'short_description',
-				'duration',
-				'hasSubtitle'
+				'added',
+				'released'
 			);
 		}
 	
@@ -175,6 +204,8 @@ class M3 extends CI_Model
 					->or_like('info', $search)
 					->or_like('extended_info', $search)
 					->or_like('description', $search)
+					// ->or_like('short_description', $search)
+					// ->or_like('company', $search)
 					->or_like('creators', $search)
 					->or_like('contributors', $search)
 					->or_like('genre', $search)
@@ -212,14 +243,14 @@ class M3 extends CI_Model
 				unset($ids[$key]);
 			}
 		}
-		
+
 		return $ids;
 	}
 
 	public function return_programs_csv_query()
 	{
 		return $this->db
-			->select('program_id,title,subtitle,episode,episodes,seriesId,quality,year,duration,short_description')
+			->select('program_id,title,subtitle,episode,episodes,seriesId,quality,year,duration,short_description,released')
 			->order_by('id', 'DESC')
 			->get('programs');
 	}

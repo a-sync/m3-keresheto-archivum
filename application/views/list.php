@@ -49,8 +49,33 @@ else
 					<?php if ($i['isSeries']): ?>
 						<span class="mdc-typography--subtitle2 cell__title--ep">(<?php echo html_escape($i['episode']); ?>. / <?php echo html_escape($i['episodes']); ?>)</span>
 					<?php endif; ?>
-					<br>
-					<span class="mdc-typography--caption"><?php echo html_escape($i['short_description']); ?></span>
+					<details>
+						<summary class="mdc-typography--caption"><?php echo trim($i['short_description']) ? html_escape($i['short_description']) : '🎬'; ?></summary>
+						<table class="mdc-data-table__table">
+							<tbody class="mdc-data-table__content">
+							<?php
+								foreach ($i as $ii => $val):
+									if(trim($val)):
+							?>
+								<tr class="mdc-data-table__row">
+									<th class="mdc-data-table__cell mdc-data-table__cell--numeric mdc-typography--caption"><?php echo html_escape($ii); ?></th>
+									<td class="mdc-data-table__cell mdc-typography--caption">
+										<?php 
+										$val = html_escape($val);
+										if ($ii === 'description' || $ii === 'short_description') {
+											$val = implode("; ", explode(';', $val));
+										}
+										echo nl2br($val); 
+									?>
+									</td>
+								</tr>
+							<?php
+									endif; 
+								endforeach;
+							?>
+							</tbody>
+						</table>
+					</details>
 				</td>
 				<td class="mdc-data-table__cell mdc-data-table__cell--numeric"><?php echo html_escape($h.$m); ?></td>
 			</tr>

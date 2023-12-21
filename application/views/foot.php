@@ -86,8 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					let playableDate = null;
 					if (releaseDate) {
 						playableDate = new Date(releaseDate);
-						//🧀🤫
-						playableDate.setDate(playableDate.getDate()-1);
+						playableDate.setHours(playableDate.getHours() - 2);
 					}
 
 					if (playableDate && playableDate <= new Date()) {

@@ -1,120 +1,170 @@
 html {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
+
 body {
-    margin: 0;
-    padding: 0 20px 20px 20px;
-    background: var(--mdc-theme-background);
+	margin: 0;
+	padding: 0 20px 20px 20px;
+	background: var(--mdc-theme-background);
 }
+
 h1 {
-    text-align: center;
-    color: var(--mdc-theme-text-primary-on-dark);
+	text-align: center;
+	color: var(--mdc-theme-text-primary-on-dark);
 }
+
 #search-form {
-    text-align: center;
+	text-align: center;
 }
+
 #search-field {
-    width: 66vw;
+	width: 66vw;
 }
+
 #search-form .mdc-text-field__icon {
-    font-size: 1.7rem;
-    cursor: auto;
+	font-size: 1.7rem;
+	cursor: auto;
 }
+
 #search-form.searching {
-    pointer-events: none;
+	pointer-events: none;
 }
+
 #search-form.searching .mdc-text-field__icon::before {
-    animation-name: spin;
-    animation-duration: 3000ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+	animation-name: spin;
+	animation-duration: 3000ms;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
 }
+
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
 }
+
 .list__total {
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: var(--mdc-theme-text-hint-on-dark);
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: var(--mdc-theme-text-hint-on-dark);
 }
+
 .paginator__wrapper {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
 }
+
 .paginator__wrapper .mdi {
-    font-size: 1.5rem;
+	font-size: 1.5rem;
 }
+
 .list__table {
-    width: 100%;
+	width: 100%;
 }
+
 .mdc-data-table__cell {
-    padding-top: 8px;
-    padding-bottom: 8px;
+	padding-top: 8px;
+	padding-bottom: 8px;
 }
+
 .cell__title {
-    white-space: normal;
-    word-wrap: break-word;
+	white-space: normal;
+	word-wrap: break-word;
 }
+
 .cell__title--subtitle {
-    font-style: italic;
+	font-style: italic;
 }
+
 .cell__title--ep {
-    font-style: italic;
+	font-style: italic;
 }
+
+.list__table td, .list__table th {
+	vertical-align: top;
+}
+
 .list__no_items {
-    text-align: center;
-    margin-top: 20px;
-    color: var(--mdc-theme-text-primary-on-dark);
+	text-align: center;
+	margin-top: 20px;
+	color: var(--mdc-theme-text-primary-on-dark);
 }
+
 footer {
-    margin-top: 20px;
-    text-align: center;
-    color: var(--mdc-theme-text-disabled-on-dark);
+	margin-top: 20px;
+	text-align: center;
+	color: var(--mdc-theme-text-disabled-on-dark);
 }
+
 .m3id {
-    user-select: all;
-    text-align: center;
-    line-height: 2rem;
+	user-select: all;
+	text-align: center;
+	line-height: 2rem;
 }
+
 .m3player {
-    text-align: center;
-    position: relative;
-    min-width: 300px;
+	text-align: center;
+	position: relative;
+	min-width: 300px;
 }
+
 .m3player .vjs-menu-button-popup .vjs-menu {
-    width: 12em;
+	width: 12em;
 }
+
 .m3player .m3player-overlay {
-    position: absolute;
-    color: white;
-    text-shadow: 1px 1px black;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0,0,0,0.4);
-    border-radius: 2px;
-    padding: 1px 4px 0 4px;
-    line-height: 1.1rem;
+	position: absolute;
+	color: white;
+	text-shadow: 1px 1px black;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(0, 0, 0, 0.4);
+	border-radius: 2px;
+	padding: 1px 4px 0 4px;
+	line-height: 1.1rem;
 }
 
 .vjs-modal-dialog.vjs-text-track-settings {
-    height: 100%;
+	height: 100%;
 }
+
 .vjs-text-track-settings .vjs-modal-dialog-content {
-    grid: none;
-    padding: 0;
+	grid: none;
+	padding: 0;
 }
+
 .vjs-text-track-settings .vjs-modal-dialog-content fieldset {
-    margin: 10px 0;
+	margin: 10px 0;
 }
+
 .vjs-text-track-settings .vjs-track-settings-controls {
-    text-align: center;
+	text-align: center;
+}
+
+details {
+	border-radius: 4px;
+	padding: 0.5em 0.5em 0;
+}
+
+summary {
+	font-weight: bold;
+	margin: -0.5em -0.5em 0;
+	padding: 0.5em;
+	cursor: pointer;
+}
+
+details[open] {
+	padding: 0.5em;
+}
+
+details[open] summary {
+	margin-bottom: 0.5em;
 }

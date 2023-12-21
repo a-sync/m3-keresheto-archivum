@@ -16,7 +16,7 @@ define('M3_WEEKLY_URL',
 );
 
 define('M3_ITEM_INFO', 
-	'https://nemzetiarchivum.hu/m3/item?id='
+	'https://nemzetiarchivum.hu/api/m3/v3/item?id='
 );
 define('M3_SERIES_INFO', 
 	'https://nemzetiarchivum.hu/m3/open?series='
@@ -309,18 +309,16 @@ class Cron extends CI_Controller {
 				try {
 					$raw = scrape_url(M3_ITEM_INFO . $program_id);
 					if ($raw !== 'false') {
-						$res = json_decode($raw, true);
+						$info_json = json_decode($raw, true);
 					}
 				} catch (Exception $error) {
 					log_message('error', $error);
 				}
 
-				if ($res) {
-					$res = $this->m3->parse_program($res);
-					$res['id'] = $id;
-					$res = $this->m3->replace_program($res);
-				} else {
-					$res = 0;
+				if ($info_json) {
+					$p = $this->m3->parse_program($info_json);
+					$p['id'] = $id;
+					$res = $this->m3->replace_program($p);
 				}
 			}
 
@@ -328,7 +326,6 @@ class Cron extends CI_Controller {
 			if ($prev_id > 0) {
 				// redirect('/cron/refresh?id='.$prev_id.'&res='.intval($res));
 				header('Refresh:1;url='.site_url('/cron/refresh?id='.$prev_id.'&res='.intval($res)));
-				exit($res);
 			} else {
 				@touch('refresh.cron.disabled');
 			}

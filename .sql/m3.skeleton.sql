@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `programs` (
   `episode` smallint(5) unsigned NOT NULL,
   `episodes` smallint(5) unsigned NOT NULL,
   `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `released` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `program_id` (`program_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci AUTO_INCREMENT=1 ;
