@@ -61,6 +61,7 @@ Az alábbi mezőket exportálja a **/public/m3-db.csv.gz** tömörített fájlba
  * year
  * duration
  * short_description
+ * released
 
 #### Műsor hozzáadása azonosító segítségével
 Útvonal: **/cron/add?id=**  

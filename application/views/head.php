@@ -22,7 +22,7 @@ if ($search) {
 	<link href="https://unpkg.com/@mdi/font@latest/css/materialdesignicons.min.css" rel="stylesheet">
 	<link href="https://unpkg.com/video.js@latest/dist/video-js.min.css" rel="stylesheet">
 	<link href="<?php echo base_url('public/m3.min.css'); ?>" rel="stylesheet">
-	<link href="<?php echo base_url('public/app.css'); ?>" rel="stylesheet">
+	<link href="<?php echo base_url('public/app.css'); ?>?v=2" rel="stylesheet">
 </head>
 <body class="mdc-typography">
 	<header>

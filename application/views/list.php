@@ -10,12 +10,14 @@ else
 	echo '<div class="mdc-typography--caption list__total">'.$total.' találat</div>';
 
 	echo $links;
+	$today_mid = new DateTime();
+	$today_mid->setTime(12, 0, 0);
 ?>
 <div class="mdc-data-table mdc-elevation--z2 list__table">
 	<table class="mdc-data-table__table">
 		<thead>
 			<tr class="mdc-data-table__header-row">
-				<th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">🎞ID</th>
+				<th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">🎞 ID</th>
 				<th class="mdc-data-table__header-cell" role="columnheader" scope="col">Cím / Rövid leírás</th>
 				<th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">Hossz</th>
 			</tr>
@@ -38,6 +40,13 @@ else
 							preload="none"
 							poster="https://nemzetiarchivum.hu/images/m3/<?php echo html_escape($i['program_id']); ?>"
 						></video>
+					<?php
+						$released_mid = new DateTime($i['released']);
+						$released_mid->modify('-1 hour')->setTime(12, 0, 0);
+						if ($released_mid > $today_mid):
+					?>
+						<div class="m3player-overlay" title="Közzététel dátuma">📅 <?php echo $released_mid->format('Y.m.d.'); ?></div>
+					<?php endif; ?>
 					</div>
 				</td>
 				<td class="mdc-data-table__cell cell__title">
@@ -51,30 +60,32 @@ else
 					<?php endif; ?>
 					<details>
 						<summary class="mdc-typography--caption"><?php echo trim($i['short_description']) ? html_escape($i['short_description']) : '🎬'; ?></summary>
-						<table class="mdc-data-table__table">
-							<tbody class="mdc-data-table__content">
-							<?php
-								foreach ($i as $ii => $val):
-									if(trim($val)):
-							?>
-								<tr class="mdc-data-table__row">
-									<th class="mdc-data-table__cell mdc-data-table__cell--numeric mdc-typography--caption"><?php echo html_escape($ii); ?></th>
-									<td class="mdc-data-table__cell mdc-typography--caption">
-										<?php 
-										$val = html_escape($val);
-										if ($ii === 'description' || $ii === 'short_description') {
-											$val = implode("; ", explode(';', $val));
-										}
-										echo nl2br($val); 
-									?>
-									</td>
-								</tr>
-							<?php
-									endif; 
-								endforeach;
-							?>
-							</tbody>
-						</table>
+						<div class="mdc-data-table mdc-elevation--z4 details__table">
+							<table class="mdc-data-table__table">
+								<tbody class="mdc-data-table__content">
+								<?php
+									foreach ($i as $ii => $val):
+										if(trim($val)):
+								?>
+									<tr class="mdc-data-table__row">
+										<td class="mdc-data-table__cell mdc-data-table__cell--numeric mdc-typography--caption"><?php echo html_escape($ii); ?></td>
+										<td class="mdc-data-table__cell mdc-typography--caption">
+											<?php 
+											$val = html_escape($val);
+											if ($ii === 'description' || $ii === 'short_description') {
+												$val = implode("; ", explode(';', $val));
+											}
+											echo nl2br($val); 
+										?>
+										</td>
+									</tr>
+								<?php
+										endif; 
+									endforeach;
+								?>
+								</tbody>
+							</table>
+						</div>
 					</details>
 				</td>
 				<td class="mdc-data-table__cell mdc-data-table__cell--numeric"><?php echo html_escape($h.$m); ?></td>

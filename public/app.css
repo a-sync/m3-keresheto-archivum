@@ -87,8 +87,13 @@ h1 {
 	font-style: italic;
 }
 
-.list__table td, .list__table th {
+.list__table td {
 	vertical-align: top;
+}
+
+.details__table tbody tr td {
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 .list__no_items {

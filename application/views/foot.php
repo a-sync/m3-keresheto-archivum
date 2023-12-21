@@ -58,57 +58,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			});
 		}
 
-		async function getReleaseDate(programid) {
-			const infoRes = await fetch(String('\x68\x74\x74\x70\x73\x3a\x2f\x2f\x6e\x65\x6d\x7a\x65\x74\x69\x61\x72\x63\x68\x69\x76\x75\x6d\x2e\x68\x75\x2f\x61\x70\x69\x2f\x6d\x33\x2f\x76\x33\x2f\x69\x74\x65\x6d\x3f\x69\x64\x3d')+programid);
-			const infoResJson = await infoRes.json();
-
-			let releaseDate = null;
-			for (const key of ['start_playable_dts', 'start_startTime_dts']) {
-				if (key in infoResJson && Array.isArray(infoResJson[key]) && infoResJson[key].length > 0) {
-					for (const dts of infoResJson[key]) {
-						const dtsDate = new Date(dts);
-						if (releaseDate === null || dtsDate < releaseDate) {
-							releaseDate = dtsDate;
-						}
-					}
-				}
-			}
-
-			return releaseDate;
-		}
-
 		const domLoaded = () => {
 			console.log('DOM loaded');
 			const videoElements = document.querySelectorAll('.video-js');
 			
 			for (const el of videoElements) {
-				getReleaseDate(el.dataset.programid).then(releaseDate => {
-					let playableDate = null;
-					if (releaseDate) {
-						playableDate = new Date(releaseDate);
-						playableDate.setHours(playableDate.getHours() - 2);
-					}
-
-					if (playableDate && playableDate <= new Date()) {
-						// el.style.border = 'solid 2px green';}if(true){//debug
-						initPlayer(el);
-					} else {
-						if (releaseDate) {
-							const overlay = document.createElement('div');
-							overlay.className = 'm3player-overlay';
-							overlay.textContent = '📅 ' + releaseDate.toLocaleString('hu-HU');
-							overlay.title = 'Közzététel időpontja';
-							el.parentNode.appendChild(overlay);
-						}
-						//debug
-						el.addEventListener('dblclick', ev => {
-							ev.preventDefault();
-							const overlay = el.parentNode.querySelector('.m3player-overlay');
-							if (overlay) overlay.remove();
-							initPlayer(el);
-						}, {'once':true});
-					}
-				});
+				const overlay = el.parentNode.querySelector('.m3player-overlay');
+				if (!overlay) initPlayer(el);
+				else el.addEventListener('dblclick',ev=>{ev.preventDefault();if(overlay){overlay.remove()};initPlayer(el);},{'once':true});// DEBUG
 			}
 		};
 

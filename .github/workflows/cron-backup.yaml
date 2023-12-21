@@ -2,7 +2,7 @@ name: cron/backup
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 8 * * 5'
+    - cron: '30 7 * * 5'
 
 jobs:
   cronjob:
