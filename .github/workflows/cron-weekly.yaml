@@ -15,7 +15,7 @@ jobs:
           url: http://m3.devs.space/cron/weekly
           method: GET
           contentType: text/plain
-          timeout: 30000
+          timeout: 60000
       - name: 🤲 Show Response
         env:
           RES_BODY: ${{ steps.req.outputs.response }}
