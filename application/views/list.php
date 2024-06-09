@@ -29,7 +29,26 @@ else
 				$m = intval($duration[1]) ? intval($duration[1]).'p' : '';
 			?>
 			<tr class="mdc-data-table__row">
-				<td class="mdc-data-table__cell"><a href="https://nemzetiarchivum.hu/m3/<?php echo html_escape($i['program_id']); ?>" target="_blank"><img width="150" border="0" src="https://nemzetiarchivum.hu/images/m3/<?php echo html_escape($i['program_id']); ?>" /></a></td>
+				<td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+					<div class="m3id"><?php echo html_escape($i['program_id']); ?></div>
+					<div class="m3player">
+						<video
+							id="vid-<?php echo html_escape(strtolower($i['program_id'])); ?>"
+							data-programid="<?php echo html_escape($i['program_id']); ?>"
+							data-hassubtitle="<?php echo html_escape($i['hasSubtitle']); ?>"
+							class="video-js"
+							preload="none"
+							poster="https://nemzetiarchivum.hu/images/m3/<?php echo html_escape($i['program_id']); ?>"
+						></video>
+					<?php
+						$released_mid = new DateTime($i['released']);
+						$released_mid->modify('-1 hour')->setTime(12, 0, 0);
+						if ($released_mid > $today_mid):
+					?>
+						<div class="m3player-overlay" title="Közzététel dátuma">📅 <?php echo $released_mid->format('Y.m.d.'); ?></div>
+					<?php endif; ?>
+					</div>
+				</td>
 				<td class="mdc-data-table__cell cell__title">
 					<span class="mdc-typography--headline6 cell__title--title"><?php echo html_escape($i['title']); ?></span>
 					<?php if ($i['subtitle']): ?>
