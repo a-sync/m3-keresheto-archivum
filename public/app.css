@@ -117,7 +117,8 @@ footer {
 .m3player {
 	text-align: center;
 	position: relative;
-	min-width: 300px;
+	/* min-width: 300px; */
+	max-width: 300px;
 }
 
 .m3player .vjs-menu-button-popup .vjs-menu {

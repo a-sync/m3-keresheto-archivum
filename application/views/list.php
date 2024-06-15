@@ -32,6 +32,7 @@ else
 				<td class="mdc-data-table__cell mdc-data-table__cell--numeric">
 					<div class="m3id"><?php echo html_escape($i['program_id']); ?></div>
 					<div class="m3player">
+						<img src="https://nemzetiarchivum.hu/images/m3/<?php echo html_escape($i['program_id']); ?>" alt="">
 						<?php
 							$released_mid = new DateTime($i['released']);
 							$released_mid->modify('-1 hour')->setTime(12, 0, 0);
