@@ -17,13 +17,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		async function startPlayer(videoElement) {
 			console.log('init player', videoElement.dataset.programid);
 
-			const vidRes = await fetch(String('\x68\x74\x74\x70\x73\x3a\x2f\x2f\x6e\x65\x6d\x7a\x65\x74\x69\x61\x72\x63\x68\x69\x76\x75\x6d\x2e\x68\x75\x2f\x6d\x33\x2f\x73\x74\x72\x65\x61\x6d\x3f\x6e\x6f\x5f\x6c\x62\x3d\x31\x26\x74\x61\x72\x67\x65\x74\x3d')+videoElement.dataset.programid);
-			const resJson = await vidRes.json();
-			const url = await getPlaylistBlob(resJson.url);
-
 			const player = videojs(videoElement.id);
 			player.src({
-				src: url,
+				src: '<?php echo base_url('playlist'); ?>?id=' + videoElement.dataset.programid,
 				type: 'application/x-mpegURL'
   			});
 
@@ -56,22 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}, () => {
 				player.one('click', () => startPlayer(el));
 			});
-		}
-		
-		async function getPlaylistBlob(url) {
-			const response = await fetch(url, {
-				headers: new Headers({
-					'User-Agent': ''
-				})
-			});
-
-			if (!response.ok) {
-				throw new Error(`Failed to fetch playlist: ${response.statusText}`);
-			}
-
-			const playlistText = await response.text();
-			const blob = new Blob([playlistText], { type: 'application/x-mpegURL' });
-			return URL.createObjectURL(blob);
 		}
 
 		const domLoaded = () => {
