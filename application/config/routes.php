@@ -53,4 +53,5 @@ $route['default_controller'] = 'app';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['(:num)'] = 'app';
+$route['(:num)'] = 'app/index';
+$route['playlist'] = 'app/playlist';

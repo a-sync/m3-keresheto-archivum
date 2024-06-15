@@ -51,14 +51,17 @@ class App extends CI_Controller {
 			$this->load->helper('curl');
 
 			try {
-				$raw = scrape_url('\x68\x74\x74\x70\x73\x3a\x2f\x2f\x6e\x65\x6d\x7a\x65\x74\x69\x61\x72\x63\x68\x69\x76\x75\x6d\x2e\x68\x75\x2f\x6d\x33\x2f\x73\x74\x72\x65\x61\x6d\x3f\x6e\x6f\x5f\x6c\x62\x3d\x31\x26\x74\x61\x72\x67\x65\x74\x3d' . $id);
+				$raw = scrape_url(hex2bin('68747470733a2f2f6e656d7a657469617263686976756d2e68752f6d332f73747265616d3f6e6f5f6c623d31267461726765743d') . $id);
 
 				$res = json_decode($raw, true);
-				$playlist = scrape_url($res['url'], '', '');
 
-				if (count($playlist) > 130) {
-					header('Content-Type: application/x-mpegURL');
-					$output = $playlist;
+				if (is_array($res)) {
+					$playlist = scrape_url($res['url'], '', '');
+
+					if (strlen($playlist) > 130) {
+						header('Content-Type: application/x-mpegURL');
+						$output = $playlist;
+					}
 				}
 			} catch (Exception $error) {
 				log_message('error', $error);
