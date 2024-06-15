@@ -60,7 +60,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		async function getPlaylistBlob(url) {
 			const response = await fetch(url, {
-				headers: { 'User-Agent': '' }
+				headers: new Headers({
+					'User-Agent': ''
+				})
 			});
 
 			if (!response.ok) {
