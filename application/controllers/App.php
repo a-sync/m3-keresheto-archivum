@@ -41,33 +41,4 @@ class App extends CI_Controller {
 		));
 		$this->load->view('foot');
 	}
-
-	public function playlist()
-	{
-		$output = '';
-		$id = strtoupper(strval($this->input->get('id')));
-
-		if (substr($id, 0, 3 ) === 'M3-' && ctype_alnum(substr($id, 3))) {
-			$this->load->helper('curl');
-
-			try {
-				$raw = scrape_url(hex2bin('68747470733a2f2f6e656d7a657469617263686976756d2e68752f6d332f73747265616d3f6e6f5f6c623d31267461726765743d') . $id);
-
-				$res = json_decode($raw, true);
-
-				if (is_array($res)) {
-					$playlist = scrape_url($res['url'], '', '');
-
-					if (strlen($playlist) > 130) {
-						header('Content-Type: application/x-mpegURL');
-						$output = $playlist;
-					}
-				}
-			} catch (Exception $error) {
-				log_message('error', $error);
-			}
-		}
-
-		$this->load->view('cron', array('output'=>$output));
-	}
 }
