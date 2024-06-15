@@ -118,7 +118,14 @@ footer {
 	text-align: center;
 	position: relative;
 	/* min-width: 300px; */
+}
+
+.m3player img {
+	text-align: center;
+	position: relative;
+	vertical-align: top;
 	max-width: 300px;
+	max-height: 300px;
 }
 
 .m3player .vjs-menu-button-popup .vjs-menu {
