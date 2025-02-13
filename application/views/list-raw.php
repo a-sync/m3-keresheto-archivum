@@ -26,7 +26,7 @@ else
 			<?php foreach ($items as $i):
 				$duration = explode(':', $i['duration']);
 				$h = intval($duration[0]) ? intval($duration[0]).'ó ' : '';
-				$m = intval($duration[1]) ? intval($duration[1]).'p' : '';
+				$m = intval(isset($duration[1])) ? intval($duration[1]).'p' : '';
 			?>
 			  <tr class="mdc-data-table__row">
 				  <?php foreach ($i as $ii => $val): ?>
